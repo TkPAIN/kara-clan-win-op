@@ -1,102 +1,43 @@
-# 🚀 KARA CLAN — OPTIMIZADOR WINDOWS
+# 🚀 KARA CLAN — WINDOWS OPTIMIZER 2026 (ES / EN)
 
-**Scripts PowerShell para optimizar Windows 10/11 al máximo**
+**The easiest, most beautiful and powerful Windows 10/11 optimizer**
 
-> Descarga, ejecuta, y acelera tu PC en minutos.
+![Windows](https://img.shields.io/badge/Windows-10%20%2F%2011-0078D4)
+![PowerShell](https://img.shields.io/badge/PowerShell-7-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![GUI](https://img.shields.io/badge/GUI-All--in--One-gold)
 
----
+### ✨ NEW: ALL-IN-ONE GUI LAUNCHER (Recommended)
 
-## 📦 Volúmenes disponibles
+Just download and double-click the launcher → beautiful graphical interface opens automatically as Administrator.
 
-### **Vol.1 - Esencial** 🔹
-- **Archivo:** `OptimizarWindows_v1.ps1`
-- **Tiempo:** ~2 minutos
-- **Mejoras:** 8 optimizaciones básicas de red
-  - Nagle's Algorithm OFF
-  - DNS Cloudflare
-  - P2P Updates desactivado
-  - Telemetría mínima
-
-### **Vol.2 - Avanzado** 🔷
-- **Archivo:** `OptimizarWindows_v2.ps1`
-- **Tiempo:** ~3 minutos
-- **Mejoras:** 17 optimizaciones de red y sistema
-  - Todo lo del Vol.1
-  - Plan Alto Rendimiento
-  - QoS DSCP 46
-  - GPU Priority
-  - Game Mode ON
-  - SysMain OFF (SSD)
-
-### **Vol.3 - Completo** 🔶
-- **Archivo:** `OptimizarWindows_v3.ps1`
-- **Tiempo:** ~5 minutos
-- **Mejoras:** 20 optimizaciones completas
-  - Todo lo del Vol.2
-  - Servicios innecesarios desactivados
-  - Animaciones OFF
-  - CPU Priority máxima
-  - Limpieza de disco automática
-  - TRIM SSD
-  - Optimizaciones de memoria
+**[⬇️ DOWNLOAD KARA CLAN ALL-IN-ONE LAUNCHER](https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/KaraClan_Launcher.bat)**
 
 ---
 
-## ⚡ Instrucciones de uso
+### 📥 Individual Versions
 
-### **Paso 1: Descargar**
-1. Elige tu volumen en la página web: [kara-clan-win-op.github.io](https://tkpain.github.io/kara-clan-win-op)
-2. O descarga directamente desde aquí
-
-### **Paso 2: Ejecutar como Administrador**
-```powershell
-# Opción A: Clic derecho > "Ejecutar con PowerShell"
-# Opción B: Abre PowerShell como admin y copia:
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-# Luego arrastra el archivo y pulsa Enter
-```
-
-### **Paso 3: Reiniciar**
-Luego de que termine, reinicia tu PC para aplicar todos los cambios.
+| Version       | Name                        | Features                  | Download |
+|---------------|-----------------------------|---------------------------|----------|
+| **Vol.1**     | Basic / Esencial            | Network optimization      | [Download Vol.1](https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat) |
+| **Vol.2**     | Advanced / Avanzado         | Gaming + GPU (Coming Soon) | — |
+| **Vol.3**     | Complete / Completo         | Full system + cleanup (Coming Soon) | — |
 
 ---
 
-## 🛡️ Seguridad
-
-✅ **Scripts 100% seguros:**
-- Código abierto y visible
-- Funciones de error handling
-- Sin virus ni malware
-- Reversibles en cualquier momento
+### 🔄 REVERT ALL CHANGES
+**[⬇️ Revert_Optimizer.bat](https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat)**
 
 ---
 
-## 📊 Estadísticas
+### 🛡️ Security & Trust
+- 100% Open Source
+- No malware, no telemetry
+- Fully reversible
+- Runs only as Administrator (you control everything)
 
-Descargas actuales disponibles en la página web.
-
----
-
-## 💡 Preguntas frecuentes
-
-**¿Es seguro ejecutar estos scripts?**
-> Sí. El código es abierto, revisable, y solo modifica configuraciones de Windows que pueden revertirse.
-
-**¿Pierde garantía mi PC?**
-> No. Solo cambias configuraciones del sistema operativo.
-
-**¿Funciona en Windows 10 y 11?**
-> Sí, ambas versiones. Testado en Windows 11.
-
-**¿Puedo revertir los cambios?**
-> Sí, usa la herramienta integrada de Windows: `Settings > System > Recovery > Reset this PC`
+**Made with ❤️ by TkPAIN • 2026**
 
 ---
 
-## 📝 Licencia
-
-MIT — Úsalo libremente.
-
----
-
-**Made by TkPAIN | 2026**
+**Website:** https://tkpain.github.io/kara-clan-win-op/
