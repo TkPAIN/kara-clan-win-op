@@ -25,7 +25,7 @@ $subtitle.AutoSize = $true
 $subtitle.Location = New-Object System.Drawing.Point(265, 80)
 $form.Controls.Add($subtitle)
 
-function Create-BigButton($text, $y, $color, $action) {
+function Create-BigButton($text, $y, $color, $script) {
     $btn = New-Object System.Windows.Forms.Button
     $btn.Text = $text
     $btn.Size = New-Object System.Drawing.Size(380, 85)
@@ -35,28 +35,19 @@ function Create-BigButton($text, $y, $color, $action) {
     $btn.ForeColor = [System.Drawing.Color]::White
     $btn.FlatStyle = "Flat"
     $btn.FlatAppearance.BorderSize = 0
-    $btn.Add_Click($action)
+    $btn.Add_Click({ 
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/$script | iex`"" -Verb RunAs 
+    })
     $form.Controls.Add($btn)
 }
 
-Create-BigButton "🚀 Vol.1 - BASIC / ESENCIAL" 160 ([System.Drawing.Color]::FromArgb(0, 122, 204)) {
-    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/OptimizarWindows_v1.ps1 | iex"' -Verb RunAs
-}
-
-Create-BigButton "🚀 Vol.2 - ADVANCED / AVANZADO" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) {
-    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/OptimizarWindows_v2.ps1 | iex"' -Verb RunAs
-}
-
-Create-BigButton "🚀 Vol.3 - COMPLETE / COMPLETO" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) {
-    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/OptimizarWindows_v3.ps1 | iex"' -Verb RunAs
-}
-
-Create-BigButton "🔄 REVERT ALL CHANGES / REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) {
-    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.ps1 | iex"' -Verb RunAs
-}
+Create-BigButton "🚀 Vol.1 - BÁSICA" 160 ([System.Drawing.Color]::FromArgb(0, 122, 204)) "OptimizarWindows_v1.ps1"
+Create-BigButton "🚀 Vol.2 - AVANZADA" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) "OptimizarWindows_v2.ps1"
+Create-BigButton "🚀 Vol.3 - COMPLETA" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) "OptimizarWindows_v3.ps1"
+Create-BigButton "🔄 REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) "Revert_Optimizer.ps1"
 
 $footer = New-Object System.Windows.Forms.Label
-$footer.Text = "✅ One-click • Runs as Administrator • 100% Open Source"
+$footer.Text = "✅ One-click • Ejecuta como Administrador • 100% Open Source"
 $footer.ForeColor = [System.Drawing.Color]::Gray
 $footer.AutoSize = $true
 $footer.Location = New-Object System.Drawing.Point(140, 590)
