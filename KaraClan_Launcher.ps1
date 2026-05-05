@@ -35,8 +35,8 @@ function Create-BigButton($text, $y, $color, $script) {
     $btn.ForeColor = [System.Drawing.Color]::White
     $btn.FlatStyle = "Flat"
     $btn.FlatAppearance.BorderSize = 0
-    $btn.Add_Click({ 
-        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/$script | iex`"" -Verb RunAs 
+    $btn.Add_Click({
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -NoExit -Command `"irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/$script | iex`"" -Verb RunAs
     })
     $form.Controls.Add($btn)
 }
@@ -47,7 +47,7 @@ Create-BigButton "🚀 Vol.3 - COMPLETA" 360 ([System.Drawing.Color]::FromArgb(2
 Create-BigButton "🔄 REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) "Revert_Optimizer.ps1"
 
 $footer = New-Object System.Windows.Forms.Label
-$footer.Text = "✅ One-click • Ejecuta como Administrador • 100% Open Source"
+$footer.Text = "✅ One-click • Ejecuta como Administrador"
 $footer.ForeColor = [System.Drawing.Color]::Gray
 $footer.AutoSize = $true
 $footer.Location = New-Object System.Drawing.Point(140, 590)
