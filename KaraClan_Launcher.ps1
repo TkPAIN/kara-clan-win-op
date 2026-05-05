@@ -27,10 +27,10 @@ $form.Controls.Add($subtitle)
 
 # URLs de los scripts (cámbialas si quieres usar .ps1 en vez de .bat)
 $scripts = @{
-    "Vol.1 – BÁSICA"    = "https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat"
-    "Vol.2 – AVANZADA"  = "https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v2.bat"
-    "Vol.3 – COMPLETA"  = "https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v3.bat"
-    "REVERTIR TODO"     = "https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat"
+    "Vol.1 – BÁSICA"    = "https://github.com/TkPAIN/kara-clan-win-op/blob/main/OptimizarWindows_v1.ps1"
+    "Vol.2 – AVANZADA"  = "https://github.com/TkPAIN/kara-clan-win-op/blob/main/OptimizarWindows_v2.ps1"
+    "Vol.3 – COMPLETA"  = "https://github.com/TkPAIN/kara-clan-win-op/blob/main/OptimizarWindows_v3.ps1"
+    "REVERTIR TODO"     = "https://github.com/TkPAIN/kara-clan-win-op/blob/main/Revert_Optimizer.ps1"
 }
 
 # Función para ejecutar script como administrador
