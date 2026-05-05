@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kara Clan • Windows Optimizer 2026</title>
+  <meta name="description" content="Kara Clan - All-in-One Windows Optimizer with Beautiful GUI • One Click">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(180deg, #1a1833 0%, #0f0c29 100%);
+      color: #eee;
+      font-family: 'Inter', system-ui, sans-serif;
+      text-align: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .lang-selector {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid #ffd700;
+      border-radius: 9999px;
+      padding: 8px 12px;
+      color: #fff;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .lang-selector select {
+      background: transparent;
+      border: none;
+      color: #ffd700;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .hero {
+      background: rgba(0, 0, 0, 0.6);
+      border: 3px solid #ffd700;
+      border-radius: 28px;
+      padding: 3rem 2rem 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
+    }
+    .logo {
+      font-size: 9rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(90deg, #ffd700, #ffcc00);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+    }
+    h1 { color: #ffd700; font-size: 2.8rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -1px; }
+    .subtitle { color: #ccc; font-size: 1.35rem; font-weight: 500; }
+
+    .new-badge {
+      background: #111;
+      color: #ffd700;
+      padding: 8px 24px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .main-button {
+      background: linear-gradient(90deg, #ffd700, #ffcc00);
+      color: #111;
+      font-size: 1.65rem;
+      font-weight: 800;
+      padding: 1.4rem 3rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.5);
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+    }
+    .main-button:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 30px 50px rgba(255, 215, 0, 0.6);
+    }
+
+    .features { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; }
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .warning {
+      background: #3a2a00;
+      border: 3px solid #ffd700;
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin: 3rem auto;
+      max-width: 900px;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      color: #ffd700;
+      font-size: 1.6rem;
+      margin: 3rem 0 2rem;
+      font-weight: 700;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 3px solid #ffd700;
+      border-radius: 22px;
+      padding: 2rem 1.5rem;
+      transition: all 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+    }
+    .card-header {
+      background: #ffd700;
+      color: #111;
+      font-weight: 800;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+    .btn-yellow { background: #ffd700; color: #111; }
+    .btn-gray { background: #555; color: #ddd; cursor: not-allowed; }
+
+    .revert-btn {
+      background: linear-gradient(90deg, #c0392b, #e74c3c);
+      color: white;
+      padding: 1.4rem 4rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      border-radius: 9999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 15px 30px rgba(192, 57, 43, 0.4);
+      transition: all 0.3s;
+    }
+    .revert-btn:hover { transform: scale(1.05); }
+
+    footer {
+      margin-top: 4rem;
+      color: #888;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- LANGUAGE SELECTOR -->
+  <div class="header">
+    <div class="lang-selector">
+      🌐 
+      <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="es">🇪🇸 Español</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <div class="logo">KA</div>
+    <h1 id="title">KARA CLAN</h1>
+    <p class="subtitle" id="subtitle">WINDOWS OPTIMIZER 2026</p>
+
+    <div class="new-badge" id="new-badge">
+      ✨ NEW • ALL-IN-ONE GUI LAUNCHER
+    </div>
+
+    <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/KaraClan_Launcher.bat" 
+       download="KaraClan_Launcher.bat" 
+       class="main-button" id="main-button">
+      🚀 DESCARGAR ALL-IN-ONE LAUNCHER
+    </a>
+
+    <div class="features" id="features">
+      <div class="feature" id="feature1">✅ Beautiful GUI • One Click</div>
+      <div class="feature" id="feature2">✅ Runs as Admin</div>
+      <div class="feature" id="feature3">✅ Elige Vol.1, Vol.2, Vol.3 o Revertir</div>
+    </div>
+  </div>
+
+  <!-- WARNING -->
+  <div class="warning" id="warning">
+    ⚠️ <strong>IMPORTANT / IMPORTANTE:</strong><br>
+    Create a System Restore Point before running any optimizer.<br>
+    Crea un punto de restauración del sistema primero.
+  </div>
+
+  <!-- INDIVIDUAL VERSIONS -->
+  <h2 class="section-title" id="section-title">O también descarga las versiones individuales</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-header" id="vol1-header">VOL.1 • BASIC</div>
+      <h3 id="vol1-title">Esencial / Essential</h3>
+      <p id="vol1-desc">Optimización básica de red • Network basics</p>
+      <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat" download="Optimizar_v1.bat" class="btn btn-yellow">📥 Descargar Vol.1</a>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="vol2-header">VOL.2 • ADVANCED</div>
+      <h3 id="vol2-title">Avanzado / Advanced</h3>
+      <p id="vol2-desc">Gaming + GPU Priority • Coming very soon</p>
+      <a href="#" class="btn btn-gray">🔜 Próximamente</a>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="vol3-header">VOL.3 • COMPLETE</div>
+      <h3 id="vol3-title">Completo / Full</h3>
+      <p id="vol3-desc">Servicios + Limpieza + Disco • Coming very soon</p>
+      <a href="#" class="btn btn-gray">🔜 Próximamente</a>
+    </div>
+  </div>
+
+  <!-- REVERT -->
+  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat" 
+     download="Revert_Optimizer.bat" 
+     class="revert-btn" id="revert-btn">
+    🔄 REVERT ALL CHANGES / REVERTIR TODO
+  </a>
+
+  <footer id="footer">
+    ✅ 100% Open Source • Sin malware • Reversible • Compatible Windows 10 / 11<br>
+    Made with ❤️ by <strong>TkPAIN</strong> • 2026
+  </footer>
+
+</div>
+
+<script>
+  const translations = {
+    es: { title:"KARA CLAN", subtitle:"WINDOWS OPTIMIZER 2026", newBadge:"✨ NEW • ALL-IN-ONE GUI LAUNCHER", mainButton:"🚀 DESCARGAR ALL-IN-ONE LAUNCHER", feature1:"✅ Interfaz gráfica hermosa • Un clic", feature2:"✅ Se ejecuta como Administrador", feature3:"✅ Elige Vol.1, Vol.2, Vol.3 o Revertir", warning:"⚠️ <strong>IMPORTANTE:</strong><br>Crea un punto de restauración del sistema primero.", sectionTitle:"O también descarga las versiones individuales", vol1Header:"VOL.1 • BÁSICO", vol1Title:"Esencial", vol1Desc:"Optimización básica de red", vol2Header:"VOL.2 • AVANZADO", vol2Title:"Avanzado", vol2Desc:"Gaming + GPU Priority • Próximamente", vol3Header:"VOL.3 • COMPLETO", vol3Title:"Completo", vol3Desc:"Servicios + Limpieza + Disco • Próximamente", revertBtn:"🔄 REVERTIR TODO", footer:"✅ 100% Open Source • Sin malware • Reversible • Compatible Windows 10 / 11<br>Made with ❤️ by <strong>TkPAIN</strong> • 2026" },
+    en: { title:"KARA CLAN", subtitle:"WINDOWS OPTIMIZER 2026", newBadge:"✨ NEW • ALL-IN-ONE GUI LAUNCHER", mainButton:"🚀 DOWNLOAD ALL-IN-ONE LAUNCHER", feature1:"✅ Beautiful GUI • One Click", feature2:"✅ Runs as Admin", feature3:"✅ Choose Vol.1, Vol.2, Vol.3 or Revert", warning:"⚠️ <strong>IMPORTANT:</strong><br>Create a System Restore Point before running any optimizer.", sectionTitle:"Or also download the individual versions", vol1Header:"VOL.1 • BASIC", vol1Title:"Essential", vol1Desc:"Basic network optimization", vol2Header:"VOL.2 • ADVANCED", vol2Title:"Advanced", vol2Desc:"Gaming + GPU Priority • Coming soon", vol3Header:"VOL.3 • COMPLETE", vol3Title:"Complete", vol3Desc:"Services + Cleanup + Disk • Coming soon", revertBtn:"🔄 REVERT ALL CHANGES", footer:"✅ 100% Open Source • No malware • Reversible • Compatible Windows 10 / 11<br>Made with ❤️ by <strong>TkPAIN</strong> • 2026" },
+    fr: { title:"KARA CLAN", subtitle:"OPTIMISEUR WINDOWS 2026", newBadge:"✨ NOUVEAUTÉ • LAUNCHER GUI TOUT-EN-UN", mainButton:"🚀 TÉLÉCHARGER LE LAUNCHER TOUT-EN-UN", feature1:"✅ Belle interface graphique • Un clic", feature2:"✅ S'exécute en Administrateur", feature3:"✅ Choisis Vol.1, Vol.2, Vol.3 ou Revert", warning:"⚠️ <strong>IMPORTANT :</strong><br>Crée un point de restauration système avant d'exécuter.", sectionTitle:"Ou télécharge aussi les versions individuelles", vol1Header:"VOL.1 • BASIQUE", vol1Title:"Essentiel", vol1Desc:"Optimisation réseau basique", vol2Header:"VOL.2 • AVANCÉ", vol2Title:"Avancé", vol2Desc:"Gaming + Priorité GPU • Bientôt", vol3Header:"VOL.3 • COMPLET", vol3Title:"Complet", vol3Desc:"Services + Nettoyage + Disque • Bientôt", revertBtn:"🔄 ANNULER TOUT", footer:"✅ 100% Open Source • Aucun malware • Réversible • Compatible Windows 10 / 11<br>Fait avec ❤️ par <strong>TkPAIN</strong> • 2026" },
+    it: { title:"KARA CLAN", subtitle:"OTTIMIZZATORE WINDOWS 2026", newBadge:"✨ NUOVO • LAUNCHER GUI TUTTO-IN-UNO", mainButton:"🚀 SCARICA IL LAUNCHER TUTTO-IN-UNO", feature1:"✅ Bellissima interfaccia grafica • Un clic", feature2:"✅ Esegue come Amministratore", feature3:"✅ Scegli Vol.1, Vol.2, Vol.3 o Revert", warning:"⚠️ <strong>IMPORTANTE:</strong><br>Crea un punto di ripristino del sistema prima.", sectionTitle:"O scarica anche le versioni individuali", vol1Header:"VOL.1 • BASE", vol1Title:"Essenziale", vol1Desc:"Ottimizzazione rete base", vol2Header:"VOL.2 • AVANZATO", vol2Title:"Avanzato", vol2Desc:"Gaming + Priorità GPU • Prossimamente", vol3Header:"VOL.3 • COMPLETO", vol3Title:"Completo", vol3Desc:"Servizi + Pulizia + Disco • Prossimamente", revertBtn:"🔄 ANNULLA TUTTO", footer:"✅ 100% Open Source • Nessun malware • Reversibile • Compatibile Windows 10 / 11<br>Fatto con ❤️ da <strong>TkPAIN</strong> • 2026" },
+    ar: { title:"KARA CLAN", subtitle:"محسن ويندوز 2026", newBadge:"✨ جديد • مشغل واجهة رسومية كامل", mainButton:"🚀 تحميل المشغل الكامل", feature1:"✅ واجهة جميلة • نقرة واحدة", feature2:"✅ يعمل كمسؤول", feature3:"✅ اختر Vol.1 أو Vol.2 أو Vol.3 أو إلغاء", warning:"⚠️ <strong>مهم:</strong><br>أنشئ نقطة استعادة نظام قبل التشغيل.", sectionTitle:"أو حمل الإصدارات الفردية", vol1Header:"VOL.1 • أساسي", vol1Title:"أساسي", vol1Desc:"تحسين الشبكة الأساسي", vol2Header:"VOL.2 • متقدم", vol2Title:"متقدم", vol2Desc:"الألعاب + أولوية GPU • قريباً", vol3Header:"VOL.3 • كامل", vol3Title:"كامل", vol3Desc:"الخدمات + التنظيف + القرص • قريباً", revertBtn:"🔄 إلغاء كل التغييرات", footer:"✅ 100% مفتوح المصدر • بدون برمجيات خبيثة • قابل للإلغاء • متوافق ويندوز 10 / 11<br>صنع بحب ❤️ بواسطة <strong>TkPAIN</strong> • 2026" },
+    zh: { title:"KARA CLAN", subtitle:"Windows 优化器 2026", newBadge:"✨ 新 • 一体式 GUI 启动器", mainButton:"🚀 下载一体式启动器", feature1:"✅ 精美图形界面 • 一键", feature2:"✅ 以管理员身份运行", feature3:"✅ 选择 Vol.1、Vol.2、Vol.3 或还原", warning:"⚠️ <strong>重要：</strong><br>运行前请创建系统还原点。", sectionTitle:"或下载单个版本", vol1Header:"VOL.1 • 基础版", vol1Title:"基础", vol1Desc:"基础网络优化", vol2Header:"VOL.2 • 高级版", vol2Title:"高级", vol2Desc:"游戏 + GPU 优先 • 即将推出", vol3Header:"VOL.3 • 完整版", vol3Title:"完整", vol3Desc:"服务 + 清理 + 磁盘 • 即将推出", revertBtn:"🔄 还原所有更改", footer:"✅ 100% 开源 • 无恶意软件 • 可还原 • 支持 Windows 10 / 11<br>由 <strong>TkPAIN</strong> 用 ❤️ 制作 • 2026" },
+    ja: { title:"KARA CLAN", subtitle:"Windows オプティマイザー 2026", newBadge:"✨ NEW • オールインワン GUI ランチャー", mainButton:"🚀 オールインワンランチャーをダウンロード", feature1:"✅ 美しいGUI • ワンクリック", feature2:"✅ 管理者として実行", feature3:"✅ Vol.1、Vol.2、Vol.3、または元に戻すを選択", warning:"⚠️ <strong>重要：</strong><br>実行前にシステムの復元ポイントを作成してください。", sectionTitle:"または個別バージョンをダウンロード", vol1Header:"VOL.1 • 基本", vol1Title:"基本", vol1Desc:"基本的なネットワーク最適化", vol2Header:"VOL.2 • 高度", vol2Title:"高度", vol2Desc:"ゲーム + GPU優先 • 近日公開", vol3Header:"VOL.3 • 完全", vol3Title:"完全", vol3Desc:"サービス + クリーンアップ + ディスク • 近日公開", revertBtn:"🔄 すべての変更を元に戻す", footer:"✅ 100% オープンソース • マルウェアなし • 元に戻せる • Windows 10 / 11対応<br><strong>TkPAIN</strong> が ❤️ を込めて作成 • 2026" }
+  };
+
+  function changeLanguage(lang) {
+    const t = translations[lang] || translations.es;
+    document.getElementById('title').textContent = t.title;
+    document.getElementById('subtitle').textContent = t.subtitle;
+    document.getElementById('new-badge').innerHTML = t.newBadge;
+    document.getElementById('main-button').innerHTML = t.mainButton;
+    document.getElementById('feature1').innerHTML = t.feature1;
+    document.getElementById('feature2').innerHTML = t.feature2;
+    document.getElementById('feature3').innerHTML = t.feature3;
+    document.getElementById('warning').innerHTML = t.warning;
+    document.getElementById('section-title').textContent = t.sectionTitle;
+    document.getElementById('vol1-header').textContent = t.vol1Header;
+    document.getElementById('vol1-title').textContent = t.vol1Title;
+    document.getElementById('vol1-desc').textContent = t.vol1Desc;
+    document.getElementById('vol2-header').textContent = t.vol2Header;
+    document.getElementById('vol2-title').textContent = t.vol2Title;
+    document.getElementById('vol2-desc').textContent = t.vol2Desc;
+    document.getElementById('vol3-header').textContent = t.vol3Header;
+    document.getElementById('vol3-title').textContent = t.vol3Title;
+    document.getElementById('vol3-desc').textContent = t.vol3Desc;
+    document.getElementById('revert-btn').innerHTML = t.revertBtn + ' / REVERT ALL CHANGES';
+    document.getElementById('footer').innerHTML = t.footer;
+
+    if (lang === 'ar') {
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.getElementById('hero').classList.add('rtl');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+      document.getElementById('hero').classList.remove('rtl');
+    }
+    localStorage.setItem('karaClanLanguage', lang);
+  }
+
+  window.onload = function() {
+    const savedLang = localStorage.getItem('karaClanLanguage') || 'es';
+    document.getElementById('languageSelect').value = savedLang;
+    changeLanguage(savedLang);
+  };
+</script>
+</body>
+</html>
