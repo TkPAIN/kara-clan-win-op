@@ -389,21 +389,57 @@
           ${card.features.map(f => `<li>${f}</li>`).join('')}
         </ul>
         <div class="card-buttons">
-          <button class="btn-download" onclick="download('${card.file}')">⬇ Download</button>
+          <button class="btn-download" onclick="downloadAndExecute('${card.file}')">⬇ Download & Run</button>
           <button class="btn-preview">▶ Preview</button>
         </div>
       </div>
     `).join('');
   }
 
-  function download(filename) {
-    const url = `https://github.com/TkPAIN/kara-clan-win-op/raw/main/${filename}`;
+  function downloadAndExecute(filename) {
+    // Method: Generate a launcher script that downloads and executes the main script
+    const launcherScript = `
+# Kara Clan - Windows Optimizer Launcher
+# This script downloads and executes the optimizer with proper permissions
+
+$url = "https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/${filename}"
+$tempPath = "$env:TEMP\\${filename}"
+
+# Verify admin
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "ERROR: Este script debe ejecutarse como Administrador" -ForegroundColor Red
+    Write-Host "Clic derecho > 'Ejecutar con PowerShell' (como admin)" -ForegroundColor Yellow
+    pause
+    exit
+}
+
+Write-Host "Descargando ${filename}..." -ForegroundColor Cyan
+try {
+    Invoke-WebRequest -Uri $url -OutFile $tempPath -ErrorAction Stop
+    Write-Host "✓ Descarga completada" -ForegroundColor Green
+} catch {
+    Write-Host "✗ Error al descargar: $_" -ForegroundColor Red
+    pause
+    exit
+}
+
+Write-Host "Ejecutando script..." -ForegroundColor Cyan
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+& $tempPath
+`;
+
+    // Trigger download of launcher script
+    const blob = new Blob([launcherScript], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = filename;
+    a.download = filename.replace('.ps1', '_launcher.ps1');
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    alert(`✓ Descargado: ${a.download}\n\n1. Haz clic derecho sobre el archivo\n2. Selecciona "Ejecutar con PowerShell"\n3. Confirma los permisos de administrador`);
   }
 
   function selectCard(idx) {
