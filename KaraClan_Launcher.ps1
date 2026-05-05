@@ -36,21 +36,14 @@ function Create-BigButton($text, $y, $color, $script) {
     $btn.FlatStyle = "Flat"
     $btn.FlatAppearance.BorderSize = 0
     $btn.Add_Click({
-        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -NoExit -Command `"irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/$script | iex`"" -Verb RunAs
+        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -NoExit -Command `"irm https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/$using:script | iex`"" -Verb RunAs
     })
     $form.Controls.Add($btn)
 }
 
-Create-BigButton "🚀 Vol.1 - BÁSICA" 160 ([System.Drawing.Color]::FromArgb(0, 122, 204)) "OptimizarWindows_v1.ps1"
-Create-BigButton "🚀 Vol.2 - AVANZADA" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) "OptimizarWindows_v2.ps1"
-Create-BigButton "🚀 Vol.3 - COMPLETA" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) "OptimizarWindows_v3.ps1"
-Create-BigButton "🔄 REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) "Revert_Optimizer.ps1"
-
-$footer = New-Object System.Windows.Forms.Label
-$footer.Text = "✅ One-click • Ejecuta como Administrador"
-$footer.ForeColor = [System.Drawing.Color]::Gray
-$footer.AutoSize = $true
-$footer.Location = New-Object System.Drawing.Point(140, 590)
-$form.Controls.Add($footer)
+Create-BigButton "Vol.1 - BASICA" 160 ([System.Drawing.Color]::FromArgb(0, 122, 204)) "OptimizarWindows_v1.ps1"
+Create-BigButton "Vol.2 - AVANZADA" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) "OptimizarWindows_v2.ps1"
+Create-BigButton "Vol.3 - COMPLETA" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) "OptimizarWindows_v3.ps1"
+Create-BigButton "REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) "Revert_Optimizer.ps1"
 
 $form.ShowDialog() | Out-Null
