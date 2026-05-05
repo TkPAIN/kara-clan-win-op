@@ -4,292 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kara Clan • Windows Optimizer 2026</title>
-  <meta name="description" content="Kara Clan - All-in-One Windows Optimizer with Beautiful GUI • One Click">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: linear-gradient(180deg, #1a1833 0%, #0f0c29 100%);
-      color: #eee;
-      font-family: 'Inter', system-ui, sans-serif;
-      text-align: center;
-      min-height: 100vh;
-      padding: 2rem 1rem;
-      line-height: 1.5;
-    }
+    body { background: linear-gradient(180deg, #1a1833 0%, #0f0c29 100%); color: #eee; font-family: 'Inter', sans-serif; text-align: center; min-height: 100vh; padding: 2rem 1rem; }
     .container { max-width: 1100px; margin: 0 auto; }
-
-    .header {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .lang-selector {
-      background: rgba(255,255,255,0.1);
-      border: 2px solid #ffd700;
-      border-radius: 9999px;
-      padding: 8px 12px;
-      color: #fff;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-    .lang-selector select {
-      background: transparent;
-      border: none;
-      color: #ffd700;
-      font-weight: 700;
-      cursor: pointer;
-      outline: none;
-    }
-
-    .hero {
-      background: rgba(0, 0, 0, 0.6);
-      border: 3px solid #ffd700;
-      border-radius: 28px;
-      padding: 3rem 2rem 3rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
-    }
-    .logo {
-      font-size: 9rem;
-      font-weight: 900;
-      line-height: 1;
-      background: linear-gradient(90deg, #ffd700, #ffcc00);
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
-    }
-    h1 { color: #ffd700; font-size: 2.8rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -1px; }
-    .subtitle { color: #ccc; font-size: 1.35rem; font-weight: 500; }
-
-    .new-badge {
-      background: #111;
-      color: #ffd700;
-      padding: 8px 24px;
-      border-radius: 9999px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin: 2rem 0 1.5rem;
-    }
-
-    .main-button {
-      background: linear-gradient(90deg, #ffd700, #ffcc00);
-      color: #111;
-      font-size: 1.65rem;
-      font-weight: 800;
-      padding: 1.4rem 3rem;
-      border-radius: 9999px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.5);
-      transition: all 0.3s ease;
-      margin-bottom: 1.5rem;
-    }
-    .main-button:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 30px 50px rgba(255, 215, 0, 0.6);
-    }
-
-    .features { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; }
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      padding: 8px 20px;
-      border-radius: 9999px;
-      font-weight: 600;
-    }
-
-    .warning {
-      background: #3a2a00;
-      border: 3px solid #ffd700;
-      border-radius: 20px;
-      padding: 1.8rem;
-      margin: 3rem auto;
-      max-width: 900px;
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-
-    .section-title {
-      color: #ffd700;
-      font-size: 1.6rem;
-      margin: 3rem 0 2rem;
-      font-weight: 700;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-    .card {
-      background: rgba(255,255,255,0.07);
-      border: 3px solid #ffd700;
-      border-radius: 22px;
-      padding: 2rem 1.5rem;
-      transition: all 0.4s ease;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
-    }
-    .card-header {
-      background: #ffd700;
-      color: #111;
-      font-weight: 800;
-      padding: 10px 20px;
-      border-radius: 9999px;
-      display: inline-block;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      font-weight: 700;
-      font-size: 1.2rem;
-      border-radius: 9999px;
-      text-decoration: none;
-      margin-top: 1rem;
-    }
-    .btn-yellow { background: #ffd700; color: #111; }
-    .btn-gray { background: #555; color: #ddd; cursor: not-allowed; }
-
-    .revert-btn {
-      background: linear-gradient(90deg, #c0392b, #e74c3c);
-      color: white;
-      padding: 1.4rem 4rem;
-      font-size: 1.4rem;
-      font-weight: 800;
-      border-radius: 9999px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 15px 30px rgba(192, 57, 43, 0.4);
-      transition: all 0.3s;
-    }
-    .revert-btn:hover { transform: scale(1.05); }
-
-    footer {
-      margin-top: 4rem;
-      color: #888;
-      font-size: 1.1rem;
-    }
+    .hero { background: rgba(0,0,0,0.6); border: 3px solid #ffd700; border-radius: 28px; padding: 3rem 2rem; margin-bottom: 3rem; box-shadow: 0 0 60px rgba(255,215,0,0.3); }
+    .logo { font-size: 9rem; font-weight: 900; background: linear-gradient(90deg,#ffd700,#ffcc00); -webkit-background-clip: text; color: transparent; margin-bottom: 1rem; }
+    h1 { color: #ffd700; font-size: 2.8rem; font-weight: 900; }
+    .main-button { background: linear-gradient(90deg,#ffd700,#ffcc00); color: #111; font-size: 1.65rem; font-weight: 800; padding: 1.4rem 3rem; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 14px; box-shadow: 0 20px 40px rgba(255,215,0,0.5); }
+    .main-button:hover { transform: translateY(-6px) scale(1.04); }
   </style>
 </head>
 <body>
 <div class="container">
-
-  <!-- LANGUAGE SELECTOR -->
-  <div class="header">
-    <div class="lang-selector">
-      🌐 
-      <select id="languageSelect" onchange="changeLanguage(this.value)">
-        <option value="es">🇪🇸 Español</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="fr">🇫🇷 Français</option>
-        <option value="it">🇮🇹 Italiano</option>
-        <option value="ar">🇸🇦 العربية</option>
-        <option value="zh">🇨🇳 中文</option>
-        <option value="ja">🇯🇵 日本語</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- HERO -->
-  <div class="hero" id="hero">
+  <div class="hero">
     <div class="logo">KA</div>
-    <h1 id="title">KARA CLAN</h1>
-    <p class="subtitle" id="subtitle">WINDOWS OPTIMIZER 2026</p>
-
-    <div class="new-badge" id="new-badge">
-      ✨ NEW • ALL-IN-ONE GUI LAUNCHER
-    </div>
-
-    <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/KaraClan_Launcher.bat" 
-       download="KaraClan_Launcher.bat" 
-       class="main-button" id="main-button">
+    <h1>KARA CLAN</h1>
+    <p>WINDOWS OPTIMIZER 2026 • ES / EN</p>
+    <div style="background:#111;color:#ffd700;padding:8px 24px;border-radius:9999px;display:inline-block;margin:20px 0;font-weight:700;">✨ NEW • ALL-IN-ONE GUI LAUNCHER</div>
+    <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/KaraClan_Launcher.bat" download="KaraClan_Launcher.bat" class="main-button">
       🚀 DESCARGAR ALL-IN-ONE LAUNCHER
     </a>
-
-    <div class="features" id="features">
-      <div class="feature" id="feature1">✅ Beautiful GUI • One Click</div>
-      <div class="feature" id="feature2">✅ Runs as Admin</div>
-      <div class="feature" id="feature3">✅ Elige Vol.1, Vol.2, Vol.3 o Revertir</div>
-    </div>
   </div>
 
-  <!-- WARNING -->
-  <div class="warning" id="warning">
-    ⚠️ <strong>IMPORTANT / IMPORTANTE:</strong><br>
-    Create a System Restore Point before running any optimizer.<br>
-    Crea un punto de restauración del sistema primero.
-  </div>
-
-  <!-- INDIVIDUAL VERSIONS -->
-  <h2 class="section-title" id="section-title">O también descarga las versiones individuales</h2>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-header" id="vol1-header">VOL.1 • BASIC</div>
-      <h3 id="vol1-title">Esencial / Essential</h3>
-      <p id="vol1-desc">Optimización básica de red • Network basics</p>
-      <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat" download="Optimizar_v1.bat" class="btn btn-yellow">📥 Descargar Vol.1</a>
-    </div>
-
-    <div class="card">
-      <div class="card-header" id="vol2-header">VOL.2 • ADVANCED</div>
-      <h3 id="vol2-title">Avanzado / Advanced</h3>
-      <p id="vol2-desc">Gaming + GPU Priority • Coming very soon</p>
-      <a href="#" class="btn btn-gray">🔜 Próximamente</a>
-    </div>
-
-    <div class="card">
-      <div class="card-header" id="vol3-header">VOL.3 • COMPLETE</div>
-      <h3 id="vol3-title">Completo / Full</h3>
-      <p id="vol3-desc">Servicios + Limpieza + Disco • Coming very soon</p>
-      <a href="#" class="btn btn-gray">🔜 Próximamente</a>
-    </div>
-  </div>
-
-  <!-- REVERT -->
-  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat" 
-     download="Revert_Optimizer.bat" 
-     class="revert-btn" id="revert-btn">
-    🔄 REVERT ALL CHANGES / REVERTIR TODO
-  </a>
-
-  <footer id="footer">
-    ✅ 100% Open Source • Sin malware • Reversible • Compatible Windows 10 / 11<br>
-    Made with ❤️ by <strong>TkPAIN</strong> • 2026
-  </footer>
-
+  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat" download="Optimizar_v1.bat">📥 Vol.1</a><br><br>
+  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat" download="Revert_Optimizer.bat">🔄 Revert</a>
 </div>
-
-<script>
-  const translations = { /* (mismo código de traducciones que antes) */ };
-  function changeLanguage(lang) { /* (mismo código de cambio de idioma) */ }
-  window.onload = function() {
-    const savedLang = localStorage.getItem('karaClanLanguage') || 'es';
-    document.getElementById('languageSelect').value = savedLang;
-    changeLanguage(savedLang);
-  };
-</script>
 </body>
 </html>
