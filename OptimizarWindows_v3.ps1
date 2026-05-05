@@ -1,3 +1,21 @@
+# 🔴 ALWAYS FIRST
+$ErrorActionPreference = "Stop"
+
+if (-not ([Security.Principal.WindowsPrincipal] 
+    [Security.Principal.WindowsIdentity]::GetCurrent()
+).IsInRole([Security.Principal.WindowsBuiltinRole] "Administrator")) {
+
+    Write-Host "Run this script as Administrator!" -ForegroundColor Red
+    exit
+}
+
+# ✅ Your script starts here
+Write-Host "Starting optimizer..."
+
+Stop-Service -Name "DiagTrack"
+
+Write-Host "Done"
+
 # OptimizarWindows_v3.ps1 - COMPLETA
 $Host.UI.RawUI.WindowTitle = "Kara Clan v3 - COMPLETA"
 Clear-Host
