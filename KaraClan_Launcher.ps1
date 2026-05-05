@@ -48,12 +48,12 @@ Create-BigButton "🚀 Vol.1 - BASIC / ESENCIAL" 160 ([System.Drawing.Color]::Fr
 
 # Vol.2
 Create-BigButton "🚀 Vol.2 - ADVANCED / AVANZADO" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) {
-    [System.Windows.Forms.MessageBox]::Show("Vol.2 is coming very soon!`n`nFor now please use Vol.1", "Kara Clan", "OK", "Information")
+    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://github.com/TkPAIN/kara-clan-win-op/blob/main/OptimizarWindows_v2.ps1 | iex"' -Verb RunAs
 }
 
 # Vol.3
 Create-BigButton "🚀 Vol.3 - COMPLETE / COMPLETO" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) {
-    [System.Windows.Forms.MessageBox]::Show("Vol.3 is coming very soon!`n`nFor now please use Vol.1", "Kara Clan", "OK", "Information")
+    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://github.com/TkPAIN/kara-clan-win-op/blob/main/OptimizarWindows_v3.ps1  | iex"' -Verb RunAs
 }
 
 # Revert
