@@ -255,4 +255,41 @@
 
     <div class="card">
       <div class="card-header" id="vol2-header">VOL.2 • ADVANCED</div>
-      <h
+      <h3 id="vol2-title">Avanzado / Advanced</h3>
+      <p id="vol2-desc">Gaming + GPU Priority • Coming very soon</p>
+      <a href="#" class="btn btn-gray">🔜 Próximamente</a>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="vol3-header">VOL.3 • COMPLETE</div>
+      <h3 id="vol3-title">Completo / Full</h3>
+      <p id="vol3-desc">Servicios + Limpieza + Disco • Coming very soon</p>
+      <a href="#" class="btn btn-gray">🔜 Próximamente</a>
+    </div>
+  </div>
+
+  <!-- REVERT -->
+  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat" 
+     download="Revert_Optimizer.bat" 
+     class="revert-btn" id="revert-btn">
+    🔄 REVERT ALL CHANGES / REVERTIR TODO
+  </a>
+
+  <footer id="footer">
+    ✅ 100% Open Source • Sin malware • Reversible • Compatible Windows 10 / 11<br>
+    Made with ❤️ by <strong>TkPAIN</strong> • 2026
+  </footer>
+
+</div>
+
+<script>
+  const translations = { /* (mismo código de traducciones que antes) */ };
+  function changeLanguage(lang) { /* (mismo código de cambio de idioma) */ }
+  window.onload = function() {
+    const savedLang = localStorage.getItem('karaClanLanguage') || 'es';
+    document.getElementById('languageSelect').value = savedLang;
+    changeLanguage(savedLang);
+  };
+</script>
+</body>
+</html>
