@@ -8,34 +8,43 @@
     };
     // =====================
 
-    // Contar y descargar sin salir de la página
+    // Descargar forzando blob para evitar mostrar el código
+    async function forceDownload(url) {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            // Extraer nombre del archivo de la URL
+            const filename = url.split('/').pop();
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (err) {
+            console.error('Error al descargar:', err);
+            alert('No se pudo descargar el archivo. Intenta de nuevo.');
+        }
+    }
+
+    // Contar y luego descargar
     function trackAndDownload(volume) {
-        const url = FILES[volume];
         fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${volume}`)
             .then(() => {
-                // Crear un enlace invisible y simular clic para forzar descarga
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = ''; // Usa el nombre del archivo automáticamente
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                // Actualizar contadores visualmente tras un momento
+                // Incremento exitoso, procedemos a descargar
+                forceDownload(FILES[volume]);
                 setTimeout(loadCounts, 1200);
             })
             .catch(err => {
-                console.error('Error al registrar:', err);
-                // Aun así se descarga
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = '';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                console.error('Error al registrar descarga:', err);
+                // Aun así descargamos el archivo
+                forceDownload(FILES[volume]);
             });
     }
 
-    // Cargar contadores desde CountAPI
+    // Cargar contadores
     async function loadCounts() {
         const volumes = ['v1', 'v2', 'v3'];
         let total = 0;
@@ -47,13 +56,13 @@
                 total += count;
                 document.getElementById(`count-${vol}`).textContent = count.toLocaleString();
             } catch (e) {
-                document.getElementById(`count-${vol}`).textContent = '?';
+                document.getElementById(`count-${vol}`).textContent = '—';
             }
         }
         document.getElementById('total').textContent = total.toLocaleString() || '—';
     }
 
-    // Asignar eventos a los botones (sin navegación)
+    // Vincular eventos
     document.getElementById('btn-v1').addEventListener('click', (e) => {
         e.preventDefault();
         trackAndDownload('v1');
@@ -67,6 +76,5 @@
         trackAndDownload('v3');
     });
 
-    // Cargar al abrir la página
     loadCounts();
 </script>
