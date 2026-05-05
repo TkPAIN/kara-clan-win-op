@@ -41,9 +41,9 @@ function Create-BigButton($text, $y, $color, $script) {
     $form.Controls.Add($btn)
 }
 
-Create-BigButton "Vol.1 - BASICA" 160 ([System.Drawing.Color]::FromArgb(0, 122, 204)) "OptimizarWindows_v1.ps1"
-Create-BigButton "Vol.2 - AVANZADA" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) "OptimizarWindows_v2.ps1"
-Create-BigButton "Vol.3 - COMPLETA" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) "OptimizarWindows_v3.ps1"
-Create-BigButton "REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) "Revert_Optimizer.ps1"
+Create-BigButton "🚀 Vol.1 - BÁSICA" 160 ([System.Drawing.Color]::FromArgb(0, 122, 204)) "OptimizarWindows_v1.ps1"
+Create-BigButton "🚀 Vol.2 - AVANZADA" 260 ([System.Drawing.Color]::FromArgb(0, 180, 0)) "OptimizarWindows_v2.ps1"
+Create-BigButton "🚀 Vol.3 - COMPLETA" 360 ([System.Drawing.Color]::FromArgb(255, 140, 0)) "OptimizarWindows_v3.ps1"
+Create-BigButton "🔄 REVERTIR TODO" 470 ([System.Drawing.Color]::FromArgb(200, 40, 40)) "Revert_Optimizer.ps1"
 
 $form.ShowDialog() | Out-Null
