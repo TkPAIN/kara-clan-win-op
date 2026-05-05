@@ -13,7 +13,7 @@
     .hero { background: rgba(0,0,0,0.6); border: 3px solid #ffd700; border-radius: 28px; padding: 3rem 2rem; margin-bottom: 3rem; box-shadow: 0 0 60px rgba(255,215,0,0.3); }
     .logo { font-size: 9rem; font-weight: 900; background: linear-gradient(90deg,#ffd700,#ffcc00); -webkit-background-clip: text; color: transparent; margin-bottom: 1rem; }
     h1 { color: #ffd700; font-size: 2.8rem; font-weight: 900; }
-    .main-button { background: linear-gradient(90deg,#ffd700,#ffcc00); color: #111; font-size: 1.65rem; font-weight: 800; padding: 1.4rem 3rem; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 14px; box-shadow: 0 20px 40px rgba(255,215,0,0.5); }
+    .main-button { background: linear-gradient(90deg,#ffd700,#ffcc00); color: #111; font-size: 1.65rem; font-weight: 800; padding: 1.4rem 3rem; border-radius: 9999px; text-decoration: none; display: inline-flex; align-items: center; gap: 14px; box-shadow: 0 20px 40px rgba(255,215,0,0.5); cursor: pointer; }
     .main-button:hover { transform: translateY(-6px) scale(1.04); }
   </style>
 </head>
@@ -24,13 +24,30 @@
     <h1>KARA CLAN</h1>
     <p>WINDOWS OPTIMIZER 2026 • ES / EN</p>
     <div style="background:#111;color:#ffd700;padding:8px 24px;border-radius:9999px;display:inline-block;margin:20px 0;font-weight:700;">✨ NEW • ALL-IN-ONE GUI LAUNCHER</div>
-    <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/KaraClan_Launcher.bat" download="KaraClan_Launcher.bat" class="main-button">
+    
+    <a onclick="forceDownload('https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/KaraClan_Launcher.bat', 'KaraClan_Launcher.bat')" class="main-button">
       🚀 DESCARGAR ALL-IN-ONE LAUNCHER
     </a>
   </div>
 
-  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat" download="Optimizar_v1.bat">📥 Vol.1</a><br><br>
-  <a href="https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat" download="Revert_Optimizer.bat">🔄 Revert</a>
+  <p style="margin:30px 0 10px;">O descarga las versiones individuales:</p>
+  <a onclick="forceDownload('https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat', 'Optimizar_v1.bat')" style="margin:10px; padding:12px 25px; background:#ffd700; color:#111; border-radius:9999px; text-decoration:none; font-weight:700;">📥 Vol.1</a>
+  <a onclick="forceDownload('https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat', 'Revert_Optimizer.bat')" style="margin:10px; padding:12px 25px; background:#c0392b; color:white; border-radius:9999px; text-decoration:none; font-weight:700;">🔄 Revert</a>
 </div>
+
+<script>
+function forceDownload(url, filename) {
+  fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+}
+</script>
 </body>
 </html>
