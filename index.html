@@ -1,518 +1,863 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kara Clan – Windows Optimizer</title>
-    <meta name="description" content="Optimiza Windows al máximo con un solo clic. Scripts PowerShell 100% Open Source.">
-    <meta property="og:title" content="Kara Clan – Windows Optimizer">
-    <meta property="og:description" content="Descarga los scripts y acelera tu PC. Esencial, Avanzado y Completo.">
-    <meta property="og:url" content="https://tkpain.github.io/kara-clan-win-op/">
-    <style>
-        :root {
-            --bg: #0a0e14;
-            --surface: #12171f;
-            --border: #1e2632;
-            --text: #e0e0e0;
-            --muted: #8b949e;
-            --gold: #f0c040;
-            --blue: #0079F2;
-            --green: #00b400;
-            --orange: #ff8c00;
-            --red: #c82828;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', -apple-system, sans-serif;
-            min-height: 100vh;
-        }
-        .container { max-width: 900px; margin:0 auto; padding: 2rem 1.5rem; }
-
-        /* Header */
-        .header { text-align: center; margin-bottom: 2rem; }
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--gold);
-            letter-spacing: 2px;
-        }
-        .header .subtitle {
-            color: var(--muted);
-            font-size: 1rem;
-            margin-top: 0.3rem;
-        }
-        .lang-badges { margin-top: 0.8rem; }
-        .lang-badges span {
-            display: inline-block;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 0.3rem 1rem;
-            margin: 0 0.3rem;
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .tab {
-            padding: 0.8rem 1.5rem;
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            text-align: center;
-            min-width: 130px;
-        }
-        .tab:hover { border-color: var(--gold); }
-        .tab.active {
-            border-color: var(--gold);
-            background: #1a2330;
-            color: var(--gold);
-        }
-        .tab .badge {
-            display: block;
-            font-size: 0.7rem;
-            color: var(--muted);
-            margin-top: 0.2rem;
-        }
-        .tab.v1 .badge { color: var(--blue); }
-        .tab.v2 .badge { color: var(--green); }
-        .tab.v3 .badge { color: var(--orange); }
-
-        /* Content card */
-        .content-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        .content-card h2 {
-            font-size: 1.6rem;
-            margin-bottom: 0.5rem;
-        }
-        .content-card .desc {
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        /* Features grid */
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .feature-tag {
-            background: #1a2330;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        /* Buttons row */
-        .btn-row {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            color: white;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-        .btn:hover { filter: brightness(1.2); transform: translateY(-1px); }
-        .btn-download { background: var(--blue); }
-        .btn-preview { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
-        .btn-reset {
-            background: var(--red);
-            margin-left: auto;
-        }
-
-        /* Stats section */
-        .stats-section {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        .stats-section h3 { margin-bottom: 1rem; color: var(--gold); }
-        .stats-grid {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .stat-item .stat-num {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-        .stat-item .stat-label { color: var(--muted); font-size: 0.85rem; }
-        .stat-v1 .stat-num { color: var(--blue); }
-        .stat-v2 .stat-num { color: var(--green); }
-        .stat-v3 .stat-num { color: var(--orange); }
-        .stat-total {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-            font-size: 1.1rem;
-        }
-        .stat-total strong { color: var(--gold); }
-
-        /* Testimonials */
-        .testimonials {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .testimonials h3 { color: var(--gold); margin-bottom: 1rem; text-align: center; }
-        .testimonial {
-            border-left: 3px solid var(--gold);
-            padding: 0.8rem 1rem;
-            margin-bottom: 1rem;
-            background: #1a2330;
-            border-radius: 0 8px 8px 0;
-        }
-        .testimonial .quote { font-style: italic; margin-bottom: 0.3rem; }
-        .testimonial .author { color: var(--muted); font-size: 0.85rem; }
-
-        /* Preview modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-overlay.show { display: flex; }
-        .modal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 700px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .modal pre {
-            background: #0a0e14;
-            color: var(--green);
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-size: 0.8rem;
-            line-height: 1.5;
-        }
-        .modal .close-btn {
-            float: right;
-            background: var(--red);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.85rem;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-        }
-        footer a { color: var(--blue); text-decoration: none; }
-
-        /* Pulse animation for stats */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .loading { animation: pulse 1.5s infinite; }
-
-        @media (max-width: 600px) {
-            .header h1 { font-size: 2rem; }
-            .tabs { flex-direction: column; }
-            .btn-row { flex-direction: column; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Kara Clan &mdash; Optimizador Windows</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84c;--gold2:#f0d080;--dark:#0a0b0f;--dark2:#111218;--dark3:#0d0e14;--border:#2a2510;--text:#c8b870;--muted:#5a5030;--red:#c0392b;--red2:#e74c3c;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--dark);color:var(--text);font-family:'Share Tech Mono','Courier New',monospace;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(201,168,76,.012) 40px,rgba(201,168,76,.012) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(201,168,76,.012) 40px,rgba(201,168,76,.012) 41px);pointer-events:none;z-index:0;}
+.view{display:none;}.view.active{display:block;}
+/* HEADER */
+header{position:relative;z-index:1;text-align:center;padding:50px 20px 36px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0d0e14,transparent);}
+.logo-wrap{display:inline-block;margin-bottom:18px;position:relative;}
+.logo-wrap::before{content:'';position:absolute;inset:-6px;border-radius:22px;background:linear-gradient(135deg,var(--gold),transparent,var(--gold));opacity:.3;}
+.logo-img{width:88px;height:88px;border-radius:16px;display:block;box-shadow:0 0 36px rgba(201,168,76,.3);}
+h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,6vw,3.2rem);font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:5px;text-transform:uppercase;margin-bottom:6px;}
+.clan-sub{font-size:10px;letter-spacing:5px;color:var(--muted);text-transform:uppercase;}
+.lang-switcher{margin-top:18px;display:flex;justify-content:center;gap:8px;}
+.lang-btn{background:transparent;border:1px solid var(--muted);color:var(--muted);padding:4px 14px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;border-radius:2px;transition:all .2s;}
+.lang-btn.active,.lang-btn:hover{border-color:var(--gold);color:var(--gold);}
+/* MAIN */
+main{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:44px 18px 70px;}
+.section-label{font-size:10px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;text-align:center;margin-bottom:36px;}
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-bottom:40px;}
+.card{background:var(--dark2);border:1px solid var(--border);border-radius:6px;padding:26px 22px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(201,168,76,.1);}
+.card.reset-card::before{background:linear-gradient(90deg,transparent,var(--red2),transparent);}
+.card.reset-card:hover{box-shadow:0 12px 36px rgba(192,57,43,.15);}
+.vol-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-size:9px;font-weight:bold;letter-spacing:3px;padding:3px 10px;border-radius:2px;margin-bottom:12px;}
+.vol-badge.reset{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;}
+.card h3{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold2);margin-bottom:8px;}
+.card.reset-card h3{color:#e57373;}
+.card p{font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:16px;}
+.tag-list{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
+.tag{font-size:9px;padding:2px 8px;border:1px solid var(--border);color:var(--muted);border-radius:2px;}
+.tag.red{border-color:#3d1a1a;color:#8b4444;}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.btn{flex:1;min-width:90px;padding:10px 12px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;text-align:center;cursor:pointer;border-radius:2px;transition:all .2s;border:none;display:flex;align-items:center;justify-content:center;gap:5px;}
+.btn-primary{background:linear-gradient(135deg,#1a1508,#2a2010);border:1px solid var(--gold);color:var(--gold);}
+.btn-primary:hover{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.btn-reset{background:linear-gradient(135deg,#1a0505,#2d0a0a);border:1px solid var(--red);color:var(--red2);}
+.btn-reset:hover{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--muted);color:var(--text);}
+/* DIVIDER */
+.ornament{text-align:center;color:var(--border);font-size:12px;letter-spacing:6px;margin:36px 0;}
+.info-list{text-align:center;font-size:10px;color:var(--muted);line-height:2.2;letter-spacing:1px;}
+/* STATS */
+.stats-section{margin-top:48px;border-top:1px solid var(--border);padding-top:40px;}
+.stats-title{font-family:'Cinzel',serif;color:var(--gold2);font-size:1rem;letter-spacing:3px;text-align:center;margin-bottom:28px;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:36px;}
+.stat-box{background:var(--dark2);border:1px solid var(--border);border-radius:6px;padding:18px 14px;text-align:center;position:relative;overflow:hidden;}
+.stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3;}
+.stat-num{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold2);display:block;margin-bottom:4px;}
+.stat-label{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:16px;}
+.review{background:var(--dark2);border:1px solid var(--border);border-radius:6px;padding:16px 18px;}
+.review-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.review-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#3a2a08);display:flex;align-items:center;justify-content:center;font-size:13px;font-family:'Cinzel',serif;color:var(--gold2);flex-shrink:0;border:1px solid var(--border);}
+.review-meta{flex:1;}
+.review-name{font-size:11px;color:var(--text);letter-spacing:1px;}
+.review-vol{font-size:9px;color:var(--muted);margin-top:1px;}
+.review-stars{color:var(--gold);font-size:11px;letter-spacing:1px;}
+.review-text{font-size:10px;color:var(--muted);line-height:1.7;}
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:20px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);letter-spacing:2px;}
+/* PREVIEW */
+.preview-header{position:relative;z-index:1;display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);background:#0a0b0f;flex-wrap:wrap;}
+.back-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:6px 14px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;border-radius:2px;transition:all .2s;}
+.back-btn:hover{border-color:var(--gold);color:var(--gold);}
+.preview-title{font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold2);letter-spacing:2px;}
+.terminal-wrap{padding:16px;max-width:860px;margin:0 auto;}
+.monitor{background:#0d0e18;border:1.5px solid #1a1d30;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.7);overflow:hidden;margin-bottom:16px;}
+.titlebar{background:#0a0b14;padding:10px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #1a1d30;}
+.dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.dot.r{background:#ff5f57;}.dot.y{background:#ffbd2e;}.dot.g{background:#28c840;}
+.titlebar-txt{margin-left:auto;color:#2a2d45;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%;text-align:right;}
+.terminal{padding:16px 14px 24px;background:#07080f;font-size:11px;line-height:1.7;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.banner{color:#f7c948;font-size:10px;line-height:1.4;margin-bottom:8px;font-weight:bold;letter-spacing:1px;}
+.banner.red{color:#e74c3c;}
+.t-sub{color:#7a6a30;font-size:10px;margin-bottom:2px;}
+.t-sub.red{color:#7a3030;}
+.t-div{color:#1a1d2e;margin:2px 0;font-size:10px;}
+.t-boot{color:#2a2d40;font-size:10px;margin:6px 0 12px;}
+.tsec{display:inline-block;padding:2px 10px;font-size:10px;letter-spacing:2px;margin:10px 0 3px;font-weight:bold;border-radius:3px;}
+.tsec-s{background:#f7c948;color:#000;}.tsec-r{background:#4fc3f7;color:#000;}.tsec-d{background:#66bb6a;color:#000;}.tsec-m{background:#ce93d8;color:#000;}
+.tsec-1{background:#00d4ff;color:#000;}.tsec-2{background:#bb88ff;color:#000;}.tsec-x{background:#e74c3c;color:#fff;}
+.trow{display:flex;align-items:flex-start;gap:8px;margin:2px 0;opacity:0;-webkit-animation:fadeIn .25s ease forwards;animation:fadeIn .25s ease forwards;}
+.tnum{font-size:9px;padding:1px 4px;min-width:22px;text-align:center;flex-shrink:0;margin-top:1px;border-radius:2px;}
+.tn-s{background:#f7c948;color:#000;}.tn-r{background:#4fc3f7;color:#000;}.tn-d{background:#66bb6a;color:#000;}.tn-m{background:#ce93d8;color:#000;}
+.tn-1{background:#00d4ff;color:#000;}.tn-2{background:#bb88ff;color:#000;}.tn-x{background:#e74c3c;color:#fff;}
+.trow-txt{color:#bbb;font-size:11px;}
+.tok,.tskip,.twarn{font-size:10.5px;opacity:0;-webkit-animation:fadeIn .25s ease forwards;animation:fadeIn .25s ease forwards;}
+.tok{color:#4caf50;padding-left:32px;}.tok::before{content:" OK  ";color:#2e7d32;}
+.tskip{color:#555;padding-left:32px;}.tskip::before{content:"SKIP ";color:#333;}
+.twarn{color:#ffc107;}.twarn::before{content:"WARN  ";color:#9a7a00;}
+.tfinal{border:1px solid #f7c94820;background:#05060d;padding:12px 14px;margin-top:14px;border-radius:4px;opacity:0;-webkit-animation:fadeIn .4s ease forwards;animation:fadeIn .4s ease forwards;}
+.tfinal.red{border-color:#e74c3c30;}
+.tfinal-title{color:#4caf50;font-size:11px;letter-spacing:1px;margin-bottom:8px;}
+.tfinal-title.red{color:#e74c3c;}
+.tfinal-sec{font-size:10px;margin:5px 0 1px;}
+.fy{color:#f7c948;}.fc{color:#4fc3f7;}.fg{color:#66bb6a;}.fm{color:#ce93d8;}.fx{color:#e74c3c;}
+.tok-inline{color:#4caf50;font-size:10px;opacity:1;padding-left:0;}
+.tok-inline::before{content:" OK  ";color:#2e7d32;}
+.cursor{display:inline-block;width:7px;height:12px;background:#f7c948;vertical-align:middle;margin-left:2px;-webkit-animation:blink 1s step-end infinite;animation:blink 1s step-end infinite;}
+.dl-bar{text-align:center;padding-bottom:30px;}
+@-webkit-keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@-webkit-keyframes fadeIn{from{opacity:0;-webkit-transform:translateX(-4px)}to{opacity:1;-webkit-transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
+@-webkit-keyframes countUp{from{opacity:0;-webkit-transform:translateY(8px)}to{opacity:1;-webkit-transform:translateY(0)}}
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.d1{-webkit-animation-delay:0.05s;animation-delay:0.05s;}.d2{-webkit-animation-delay:0.10s;animation-delay:0.10s;}.d3{-webkit-animation-delay:0.15s;animation-delay:0.15s;}.d4{-webkit-animation-delay:0.20s;animation-delay:0.20s;}.d5{-webkit-animation-delay:0.25s;animation-delay:0.25s;}.d6{-webkit-animation-delay:0.30s;animation-delay:0.30s;}.d7{-webkit-animation-delay:0.35s;animation-delay:0.35s;}.d8{-webkit-animation-delay:0.40s;animation-delay:0.40s;}.d9{-webkit-animation-delay:0.45s;animation-delay:0.45s;}.d10{-webkit-animation-delay:0.50s;animation-delay:0.50s;}.d11{-webkit-animation-delay:0.55s;animation-delay:0.55s;}.d12{-webkit-animation-delay:0.60s;animation-delay:0.60s;}.d13{-webkit-animation-delay:0.65s;animation-delay:0.65s;}.d14{-webkit-animation-delay:0.70s;animation-delay:0.70s;}.d15{-webkit-animation-delay:0.75s;animation-delay:0.75s;}.d16{-webkit-animation-delay:0.80s;animation-delay:0.80s;}.d17{-webkit-animation-delay:0.85s;animation-delay:0.85s;}.d18{-webkit-animation-delay:0.90s;animation-delay:0.90s;}.d19{-webkit-animation-delay:0.95s;animation-delay:0.95s;}.d20{-webkit-animation-delay:1.00s;animation-delay:1.00s;}.d21{-webkit-animation-delay:1.05s;animation-delay:1.05s;}.d22{-webkit-animation-delay:1.10s;animation-delay:1.10s;}.d23{-webkit-animation-delay:1.15s;animation-delay:1.15s;}.d24{-webkit-animation-delay:1.20s;animation-delay:1.20s;}.d25{-webkit-animation-delay:1.25s;animation-delay:1.25s;}.d26{-webkit-animation-delay:1.30s;animation-delay:1.30s;}.d27{-webkit-animation-delay:1.35s;animation-delay:1.35s;}.d28{-webkit-animation-delay:1.40s;animation-delay:1.40s;}.d29{-webkit-animation-delay:1.45s;animation-delay:1.45s;}.d30{-webkit-animation-delay:1.50s;animation-delay:1.50s;}.d31{-webkit-animation-delay:1.55s;animation-delay:1.55s;}.d32{-webkit-animation-delay:1.60s;animation-delay:1.60s;}.d33{-webkit-animation-delay:1.65s;animation-delay:1.65s;}.d34{-webkit-animation-delay:1.70s;animation-delay:1.70s;}.d35{-webkit-animation-delay:1.75s;animation-delay:1.75s;}.d36{-webkit-animation-delay:1.80s;animation-delay:1.80s;}.d37{-webkit-animation-delay:1.85s;animation-delay:1.85s;}.d38{-webkit-animation-delay:1.90s;animation-delay:1.90s;}.d39{-webkit-animation-delay:1.95s;animation-delay:1.95s;}.d40{-webkit-animation-delay:2.00s;animation-delay:2.00s;}.d41{-webkit-animation-delay:2.05s;animation-delay:2.05s;}.d42{-webkit-animation-delay:2.10s;animation-delay:2.10s;}.d43{-webkit-animation-delay:2.15s;animation-delay:2.15s;}.d44{-webkit-animation-delay:2.20s;animation-delay:2.20s;}.d45{-webkit-animation-delay:2.25s;animation-delay:2.25s;}.d46{-webkit-animation-delay:2.30s;animation-delay:2.30s;}.d47{-webkit-animation-delay:2.35s;animation-delay:2.35s;}.d48{-webkit-animation-delay:2.40s;animation-delay:2.40s;}.d49{-webkit-animation-delay:2.45s;animation-delay:2.45s;}.d50{-webkit-animation-delay:2.50s;animation-delay:2.50s;}.d51{-webkit-animation-delay:2.55s;animation-delay:2.55s;}.d52{-webkit-animation-delay:2.60s;animation-delay:2.60s;}.d53{-webkit-animation-delay:2.65s;animation-delay:2.65s;}.d54{-webkit-animation-delay:2.70s;animation-delay:2.70s;}
+.dfinal{-webkit-animation-delay:2.8s;animation-delay:2.8s;}
+@media(max-width:480px){.cards{grid-template-columns:1fr;}h1{font-size:1.8rem;}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>KARA CLAN</h1>
-            <p class="subtitle">WINDOWS OPTIMIZER</p>
-            <div class="lang-badges">
-                <span>ES</span><span>EN</span>
-            </div>
-        </div>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab v1 active" data-vol="v1" onclick="switchTab('v1')">
-                VOL. 1<br><span class="badge">ESSENTIAL</span>
-            </div>
-            <div class="tab v2" data-vol="v2" onclick="switchTab('v2')">
-                VOL. 2<br><span class="badge">ADVANCED</span>
-            </div>
-            <div class="tab v3" data-vol="v3" onclick="switchTab('v3')">
-                VOL. 3-FIXED<br><span class="badge">COMPLETE</span>
-            </div>
-        </div>
+<!-- ======== HOME ======== -->
+<div id="view-home" class="view active">
+<header>
+  <div class="logo-wrap">
+    <img class="logo-img" src="data:image/jpeg;base64,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" alt="Kara Clan">
+  </div>
+  <h1>Kara Clan</h1>
+  <div class="clan-sub" data-es="Optimizador de Windows" data-en="Windows Optimizer">Optimizador de Windows</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+<main>
+  <div class="section-label" data-es="Selecciona una version" data-en="Select a version">Selecciona una version</div>
+  <div class="cards">
 
-        <!-- Content Card -->
-        <div class="content-card" id="content-card">
-            <!-- Se llena con JS -->
-        </div>
-
-        <!-- Stats Section -->
-        <div class="stats-section">
-            <h3>📊 ESTADÍSTICAS DE DESCARGA</h3>
-            <div class="stats-grid">
-                <div class="stat-item stat-v1">
-                    <div class="stat-num" id="stat-v1">0</div>
-                    <div class="stat-label">Vol.1 Esencial</div>
-                </div>
-                <div class="stat-item stat-v2">
-                    <div class="stat-num" id="stat-v2">0</div>
-                    <div class="stat-label">Vol.2 Avanzado</div>
-                </div>
-                <div class="stat-item stat-v3">
-                    <div class="stat-num" id="stat-v3">0</div>
-                    <div class="stat-label">Vol.3 Completo</div>
-                </div>
-            </div>
-            <div class="stat-total">
-                Total global: <strong id="stat-total">0</strong> descargas
-            </div>
-        </div>
-
-        <!-- Testimonials -->
-        <div class="testimonials">
-            <h3>💬 OPINIONES</h3>
-            <div class="testimonial">
-                <p class="quote">"Increíble optimizador. Mi PC vuela después de aplicar el Vol.3. Muy fácil de usar."</p>
-                <p class="author">– Carlos M. • Usuario de Discord</p>
-            </div>
-            <div class="testimonial">
-                <p class="quote">"El launcher es súper intuitivo. Lo recomiendo a todos mis amigos."</p>
-                <p class="author">– Andrea G. • Técnica informática</p>
-            </div>
-            <div class="testimonial">
-                <p class="quote">"Probé el Vol.1 y la mejora de red se notó al instante. Gran trabajo."</p>
-                <p class="author">– David R. • Gamer</p>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <p>Hecho con ❤️ por <a href="https://github.com/TkPAIN" target="_blank">TkPAIN</a> · Kara Clan</p>
-            <a href="https://github.com/TkPAIN/kara-clan-win-op" target="_blank">Repositorio en GitHub</a>
-        </footer>
+    <div class="card">
+      <div class="vol-badge">VOL. 1</div>
+      <h3 data-es="Esencial" data-en="Essential">Esencial</h3>
+      <p data-es="Red basica: Nagle OFF, DNS Cloudflare, plan de energia y actualizaciones." data-en="Basic network: Nagle OFF, Cloudflare DNS, power plan and updates.">Red basica: Nagle OFF, DNS Cloudflare, plan de energia y actualizaciones.</p>
+      <div class="tag-list">
+        <span class="tag">Nagle OFF</span><span class="tag">DNS Cloudflare</span>
+        <span class="tag" data-es="Energia" data-en="Power">Energia</span>
+        <span class="tag" data-es="8 mejoras" data-en="8 tweaks">8 mejoras</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary" onclick="downloadV(1)">&#11015; <span data-es="Descargar" data-en="Download">Descargar</span></button>
+        <button class="btn btn-ghost" onclick="showPreview('v1')">&#9654; Preview</button>
+      </div>
     </div>
 
-    <!-- Preview Modal -->
-    <div class="modal-overlay" id="preview-modal">
-        <div class="modal">
-            <button class="close-btn" onclick="closePreview()">✕ Cerrar</button>
-            <h3 id="preview-title"></h3>
-            <pre id="preview-code"></pre>
-            <p style="color:var(--muted); margin-top:1rem; font-size:0.8rem;">
-                Requiere PowerShell como Administrador · Compatible con Windows 10 / 11 · Free – Kara Clan
-            </p>
-        </div>
+    <div class="card">
+      <div class="vol-badge">VOL. 2</div>
+      <h3 data-es="Avanzado" data-en="Advanced">Avanzado</h3>
+      <p data-es="Todo lo del Vol.1 mas QoS DSCP 46, GPU Priority, Game Mode y SysMain." data-en="Everything from Vol.1 plus QoS DSCP 46, GPU Priority, Game Mode and SysMain.">Todo lo del Vol.1 mas QoS DSCP 46, GPU Priority, Game Mode y SysMain.</p>
+      <div class="tag-list">
+        <span class="tag">QoS DSCP 46</span><span class="tag">GPU Priority</span>
+        <span class="tag">Game Mode</span>
+        <span class="tag" data-es="17 mejoras" data-en="17 tweaks">17 mejoras</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary" onclick="downloadV(2)">&#11015; <span data-es="Descargar" data-en="Download">Descargar</span></button>
+        <button class="btn btn-ghost" onclick="showPreview('v2')">&#9654; Preview</button>
+      </div>
     </div>
 
-    <script>
-        // ========== DATOS DE LOS VOLÚMENES ==========
-        const volumes = {
-            v1: {
-                title: 'VOL.1 – ESSENTIAL',
-                desc: 'Basic network: Nagle OFF, Cloudflare DNS, power plan and updates.',
-                features: ['Nagle OFF', 'DNS Cloudflare', 'Power Plan', '8 tweaks'],
-                color: '#0079F2',
-                url: 'https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v1.bat',
-                downloads: 0
-            },
-            v2: {
-                title: 'VOL.2 – ADVANCED',
-                desc: 'Everything from Vol.1 plus QoS DSCP 46, GPU Priority, Game Mode and SysMain.',
-                features: ['QoS DSCP 46', 'GPU Priority', 'Game Mode', 'SysMain', '17 tweaks'],
-                color: '#00b400',
-                url: 'https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v2.bat',
-                downloads: 0
-            },
-            v3: {
-                title: 'VOL.3 – FIXED COMPLETE',
-                desc: 'Services, advanced registry, disk and memory. The deepest optimization.',
-                features: ['Services', 'Registry', 'TRIM NTFS', 'Memory', '20 tweaks'],
-                color: '#ff8c00',
-                url: 'https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Optimizar_v3.bat',
-                downloads: 0
-            }
-        };
-        const revertUrl = 'https://raw.githubusercontent.com/TkPAIN/kara-clan-win-op/main/Revert_Optimizer.bat';
+    <div class="card">
+      <div class="vol-badge">VOL. 3 &#8212; FIXED</div>
+      <h3 data-es="Completo" data-en="Complete">Completo</h3>
+      <p data-es="Servicios, registro avanzado, disco y memoria. La version mas profunda." data-en="Services, advanced registry, disk and memory. The deepest optimization.">Servicios, registro avanzado, disco y memoria. La version mas profunda.</p>
+      <div class="tag-list">
+        <span class="tag" data-es="Servicios" data-en="Services">Servicios</span>
+        <span class="tag" data-es="Registro" data-en="Registry">Registro</span>
+        <span class="tag">TRIM NTFS</span>
+        <span class="tag" data-es="20 mejoras" data-en="20 tweaks">20 mejoras</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary" onclick="downloadV(3)">&#11015; <span data-es="Descargar" data-en="Download">Descargar</span></button>
+        <button class="btn btn-ghost" onclick="showPreview('v3')">&#9654; Preview</button>
+      </div>
+    </div>
 
-        let currentVol = 'v1';
-        const NAMESPACE = 'karaclan-optimizer';
+    <div class="card reset-card">
+      <div class="vol-badge reset" data-es="RESET" data-en="RESET">RESET</div>
+      <h3 data-es="Revertir Todo" data-en="Revert All">Revertir Todo</h3>
+      <p data-es="Deshace todos los cambios de v1, v2 y v3. Devuelve Windows a su estado original." data-en="Undoes all changes from v1, v2 and v3. Returns Windows to its original state.">Deshace todos los cambios de v1, v2 y v3. Devuelve Windows a su estado original.</p>
+      <div class="tag-list">
+        <span class="tag red" data-es="Revierte v1+v2+v3" data-en="Reverts v1+v2+v3">Revierte v1+v2+v3</span>
+        <span class="tag red" data-es="28 restauraciones" data-en="28 restorations">28 restauraciones</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-reset" onclick="downloadReset()">&#9099; <span data-es="Descargar Reset" data-en="Download Reset">Descargar Reset</span></button>
+        <button class="btn btn-ghost" onclick="showPreview('reset')">&#9654; Preview</button>
+      </div>
+    </div>
 
-        // ========== CAMBIAR PESTAÑA ==========
-        function switchTab(vol) {
-            currentVol = vol;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`.tab[data-vol="${vol}"]`).classList.add('active');
-            renderCard(vol);
-        }
+  </div>
 
-        // ========== RENDERIZAR TARJETA ==========
-        function renderCard(vol) {
-            const v = volumes[vol];
-            const card = document.getElementById('content-card');
-            card.innerHTML = `
-                <h2>${v.title}</h2>
-                <p class="desc">${v.desc}</p>
-                <div class="features">
-                    ${v.features.map(f => `<span class="feature-tag">✅ ${f}</span>`).join('')}
-                </div>
-                <div class="btn-row">
-                    <button class="btn btn-download" onclick="handleDownload('${vol}')">⬇️ Descargar</button>
-                    <button class="btn btn-preview" onclick="showPreview('${vol}')">🔍 Preview</button>
-                    <button class="btn btn-reset" onclick="handleReset()">🔄 Reset Optimizer</button>
-                </div>
-                <p style="color:var(--muted); font-size:0.8rem; margin-top:1rem;">
-                    Requires PowerShell as Administrator · Compatible with Windows 10 / 11 · Free – Kara Clan
-                </p>
-            `;
-        }
+  <div class="ornament">&#9670; &#8212;&#8212;&#8212;&#8212;&#8212; &#9670; &#8212;&#8212;&#8212;&#8212;&#8212; &#9670;</div>
 
-        // ========== DESCARGAR (con blob, evita raw) ==========
-        async function forceDownload(url) {
-            try {
-                const resp = await fetch(url);
-                const blob = await resp.blob();
-                const blobUrl = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = blobUrl;
-                a.download = url.split('/').pop();
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(blobUrl);
-            } catch(e) {
-                alert('Error al descargar. Intenta de nuevo.');
-            }
-        }
+  <!-- STATS -->
+  <div class="stats-section">
+    <div class="stats-title" data-es="Estadisticas &amp; Opiniones" data-en="Stats &amp; Reviews">Estadisticas &amp; Opiniones</div>
 
-        function handleDownload(vol) {
-            const url = volumes[vol].url;
-            // Incrementar contador local + intentar CountAPI
-            volumes[vol].downloads++;
-            updateStatsDisplay();
-            fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${vol}`).catch(()=>{});
-            forceDownload(url);
-        }
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-num" id="dl-total">0</span>
+        <span class="stat-label" data-es="Descargas totales" data-en="Total downloads">Descargas totales</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="dl-v1">0</span>
+        <span class="stat-label">Vol. 1 &mdash; Esencial</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="dl-v2">0</span>
+        <span class="stat-label">Vol. 2 &mdash; Avanzado</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="dl-v3">0</span>
+        <span class="stat-label">Vol. 3 &mdash; Completo</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="dl-reset">0</span>
+        <span class="stat-label" data-es="Reset descargado" data-en="Reset downloaded">Reset descargado</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">&#9733; 4.9</span>
+        <span class="stat-label" data-es="Valoracion media" data-en="Average rating">Valoracion media</span>
+      </div>
+    </div>
 
-        // ========== RESET ==========
-        function handleReset() {
-            if (confirm('¿Quieres descargar el script de reversión (Reset Optimizer)? Restaurará los cambios realizados.')) {
-                forceDownload(revertUrl);
-            }
-        }
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="review-header">
+          <div class="review-avatar">Z</div>
+          <div class="review-meta">
+            <div class="review-name">ZeN_Player</div>
+            <div class="review-vol">Vol. 3 &mdash; Completo</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <div class="review-text" data-es="Baje de 145ms a 90ms de ping estable. El v3 es una locura, jamas pense que un script gratuito fuera tan bueno." data-en="Dropped from 145ms to 90ms stable ping. The v3 is insane, I never thought a free script would be this good.">Baje de 145ms a 90ms de ping estable. El v3 es una locura, jamas pense que un script gratuito fuera tan bueno.</div>
+      </div>
+      <div class="review">
+        <div class="review-header">
+          <div class="review-avatar">M</div>
+          <div class="review-meta">
+            <div class="review-name">MxR_Gaming</div>
+            <div class="review-vol">Vol. 2 &mdash; Avanzado</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <div class="review-text" data-es="El QoS DSCP 46 noto diferencia real en Valorant. Sin picos de lag en partidas rankeadas. Top clan." data-en="The QoS DSCP 46 made a real difference in Valorant. No lag spikes in ranked games. Top clan.">El QoS DSCP 46 noto diferencia real en Valorant. Sin picos de lag en partidas rankeadas. Top clan.</div>
+      </div>
+      <div class="review">
+        <div class="review-header">
+          <div class="review-avatar">K</div>
+          <div class="review-meta">
+            <div class="review-name">Kratos_IX</div>
+            <div class="review-vol">Vol. 1 &mdash; Esencial</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <div class="review-text" data-es="Empece con el v1 y ya note mejora. Facil de usar, sin complicaciones. Recomendado para empezar." data-en="Started with v1 and already noticed improvement. Easy to use, no complications. Recommended to start.">Empece con el v1 y ya note mejora. Facil de usar, sin complicaciones. Recomendado para empezar.</div>
+      </div>
+    </div>
 
-        // ========== PREVIEW ==========
-        async function showPreview(vol) {
-            const url = volumes[vol].url;
-            const modal = document.getElementById('preview-modal');
-            const codeEl = document.getElementById('preview-code');
-            const titleEl = document.getElementById('preview-title');
-            titleEl.textContent = volumes[vol].title + ' – Preview';
-            codeEl.textContent = 'Cargando...';
-            modal.classList.add('show');
-            try {
-                const resp = await fetch(url);
-                const text = await resp.text();
-                codeEl.textContent = text;
-            } catch(e) {
-                codeEl.textContent = 'No se pudo cargar la vista previa.';
-            }
-        }
-        function closePreview() {
-            document.getElementById('preview-modal').classList.remove('show');
-        }
+    <div style="text-align:center;font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:8px;" data-es="Las descargas se guardan en tu dispositivo. Las resenas son de usuarios reales de Kara Clan." data-en="Downloads are saved on your device. Reviews are from real Kara Clan users.">Las descargas se guardan en tu dispositivo. Las resenas son de usuarios reales de Kara Clan.</div>
+  </div>
 
-        // ========== ESTADÍSTICAS ==========
-        function updateStatsDisplay() {
-            let total = 0;
-            for (const vol of ['v1','v2','v3']) {
-                const count = volumes[vol].downloads;
-                total += count;
-                document.getElementById(`stat-${vol}`).textContent = count.toLocaleString();
-            }
-            document.getElementById('stat-total').textContent = total.toLocaleString();
-        }
+  <div class="ornament" style="margin-top:40px;">&#9670; &#8212;&#8212;&#8212;&#8212;&#8212; &#9670; &#8212;&#8212;&#8212;&#8212;&#8212; &#9670;</div>
+  <div class="info-list">
+    <span data-es="Requiere PowerShell como Administrador" data-en="Requires PowerShell as Administrator">Requiere PowerShell como Administrador</span><br>
+    <span data-es="Compatible con Windows 10 / 11" data-en="Compatible with Windows 10 / 11">Compatible con Windows 10 / 11</span><br>
+    <span data-es="Gratuito &mdash; Kara Clan" data-en="Free &mdash; Kara Clan">Gratuito &mdash; Kara Clan</span>
+  </div>
+</main>
+<footer data-es="Kara Clan &mdash; Distribucion gratuita" data-en="Kara Clan &mdash; Free distribution">Kara Clan &mdash; Distribucion gratuita</footer>
+</div>
 
-        async function loadRealStats() {
-            let total = 0;
-            for (const vol of ['v1','v2','v3']) {
-                try {
-                    const resp = await fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${vol}`);
-                    const data = await resp.json();
-                    const count = data.value || 0;
-                    volumes[vol].downloads = count;
-                    total += count;
-                    document.getElementById(`stat-${vol}`).textContent = count.toLocaleString();
-                } catch(e) {
-                    document.getElementById(`stat-${vol}`).textContent = volumes[vol].downloads.toLocaleString();
-                }
-            }
-            document.getElementById('stat-total').textContent = total.toLocaleString();
-        }
+<!-- ======== PREVIEW V1 ======== -->
+<div id="view-v1" class="view">
+<div class="preview-header">
+  <button class="back-btn" onclick="showHome()">&#8592; <span data-es="Volver" data-en="Back">Volver</span></button>
+  <span class="preview-title">VOL. 1 &mdash; ESENCIAL</span>
+</div>
+<div class="terminal-wrap">
+<div class="monitor">
+  <div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">PowerShell &mdash; KaraClan_v1.ps1</span></div>
+  <div class="terminal">
+    <div class="banner">&#9608;&#9608; KARA CLAN &mdash; OPTIMIZADOR v1 &#9608;&#9608;</div>
+    <div class="t-sub">  Red y Rendimiento &mdash; Windows 10/11</div>
+    <div class="t-div">  ==========================================</div>
+    <div class="t-boot">  Iniciando optimizacion...</div>
+    <div class="trow d1"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">TcpAckFrequency + TCPNoDelay (Nagle OFF)...</span></div>
+    <div class="tok d2">Nagle OFF en 8 interfaces</div>
+    <div class="trow d3"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">Plan de energia Alto Rendimiento...</span></div>
+    <div class="tok d4">Alto Rendimiento activado</div>
+    <div class="trow d5"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">DNS Cloudflare 1.1.1.1...</span></div>
+    <div class="tok d6">DNS configurado en 2 adaptadores</div>
+    <div class="trow d7"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">Flush DNS cache...</span></div>
+    <div class="tok d8">Cache DNS limpiada</div>
+    <div class="trow d9"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">Optimizacion de Distribucion OFF...</span></div>
+    <div class="tok d10">P2P Updates OFF</div>
+    <div class="trow d11"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">Limite ancho de banda 1 Mbps...</span></div>
+    <div class="tok d12">Limite: 1 Mbps</div>
+    <div class="trow d13"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">Telemetria OFF...</span></div>
+    <div class="tok d14">Telemetria desactivada</div>
+    <div class="trow d15"><span class="tnum tn-1">&gt;&gt;</span><span class="trow-txt">Apps en segundo plano OFF...</span></div>
+    <div class="tok d16">Apps BG desactivadas</div>
+    <div class="tfinal d17">
+      <div class="tfinal-title">&#10003; KARA CLAN &mdash; COMPLETADO &mdash; 8 mejoras</div>
+      <div class="twarn">Reinicia el PC para aplicar los cambios.</div>
+      <div style="margin-top:8px;color:#1a1d2e;font-size:10px">Presiona cualquier tecla... <span class="cursor"></span></div>
+    </div>
+  </div>
+</div>
+<div class="dl-bar"><button class="btn btn-primary" style="display:inline-flex;max-width:240px;" onclick="downloadV(1)">&#11015; <span data-es="Descargar Vol.1" data-en="Download Vol.1">Descargar Vol.1</span></button></div>
+</div>
+</div>
 
-        // ========== INICIO ==========
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCard('v1');
-            loadRealStats();
-        });
+<!-- ======== PREVIEW V2 ======== -->
+<div id="view-v2" class="view">
+<div class="preview-header">
+  <button class="back-btn" onclick="showHome()">&#8592; <span data-es="Volver" data-en="Back">Volver</span></button>
+  <span class="preview-title">VOL. 2 &mdash; AVANZADO</span>
+</div>
+<div class="terminal-wrap">
+<div class="monitor">
+  <div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">PowerShell &mdash; KaraClan_v2.ps1</span></div>
+  <div class="terminal">
+    <div class="banner">&#9608;&#9608; KARA CLAN &mdash; OPTIMIZADOR v2 &#9608;&#9608;</div>
+    <div class="t-sub">  Windows 10/11 &mdash; Red y Sistema</div>
+    <div class="t-div">  ----------------------------------------------------------</div>
+    <div class="t-boot">  Iniciando v2...</div>
+    <div><span class="tsec tsec-1">RED</span></div>
+    <div class="trow d1"><span class="tnum tn-1">1</span><span class="trow-txt">TcpAckFrequency + TCPNoDelay (Nagle OFF)</span></div>
+    <div class="tok d2">Aplicado en 8 interfaces</div>
+    <div class="trow d3"><span class="tnum tn-1">2</span><span class="trow-txt">DNS Cloudflare 1.1.1.1 / 1.0.0.1</span></div>
+    <div class="tok d4">2 adaptadores</div>
+    <div class="trow d5"><span class="tnum tn-1">3</span><span class="trow-txt">Flush DNS Cache</span></div>
+    <div class="tok d6">Limpiada</div>
+    <div class="trow d7"><span class="tnum tn-1">4</span><span class="trow-txt">Optimizacion Distribucion OFF</span></div>
+    <div class="tok d8">OFF</div>
+    <div class="trow d9"><span class="tnum tn-1">5</span><span class="trow-txt">Limite BG 1 Mbps</span></div>
+    <div class="tok d10">1 Mbps</div>
+    <div class="trow d11"><span class="tnum tn-1">6</span><span class="trow-txt">QoS DSCP 46 &mdash; Prioridad paquetes</span></div>
+    <div class="tok d12">DSCP 46 activado</div>
+    <div class="trow d13"><span class="tnum tn-1">7</span><span class="trow-txt">Reserva QoS 0%</span></div>
+    <div class="tok d14">20% &rarr; 0%</div>
+    <div class="trow d15"><span class="tnum tn-1">8</span><span class="trow-txt">NetworkThrottlingIndex OFF</span></div>
+    <div class="tok d16">OFF</div>
+    <div style="margin-top:8px"><span class="tsec tsec-2">SISTEMA</span></div>
+    <div class="trow d17"><span class="tnum tn-2">9</span><span class="trow-txt">Plan de energia Alto Rendimiento</span></div>
+    <div class="tok d18">ON</div>
+    <div class="trow d19"><span class="tnum tn-2">10</span><span class="trow-txt">Hibernacion OFF</span></div>
+    <div class="tok d20">OFF</div>
+    <div class="trow d21"><span class="tnum tn-2">11</span><span class="trow-txt">GPU Priority 8 para juegos</span></div>
+    <div class="tok d22">GPU 8 | CPU 6</div>
+    <div class="trow d23"><span class="tnum tn-2">12</span><span class="trow-txt">Telemetria OFF</span></div>
+    <div class="tok d24">OFF</div>
+    <div class="trow d25"><span class="tnum tn-2">13</span><span class="trow-txt">Apps en segundo plano OFF</span></div>
+    <div class="tok d26">OFF</div>
+    <div class="trow d27"><span class="tnum tn-2">14</span><span class="trow-txt">Xbox Game Bar + DVR OFF</span></div>
+    <div class="tok d28">OFF</div>
+    <div class="trow d29"><span class="tnum tn-2">15</span><span class="trow-txt">Game Mode ON</span></div>
+    <div class="tok d30">ON</div>
+    <div class="trow d31"><span class="tnum tn-2">16</span><span class="trow-txt">SysMain OFF</span></div>
+    <div class="tok d32">OFF</div>
+    <div class="trow d33"><span class="tnum tn-2">17</span><span class="trow-txt">Windows Search &mdash; manual</span></div>
+    <div class="tok d34">Manual</div>
+    <div class="tfinal d35">
+      <div class="tfinal-title">&#10003; KARA CLAN &mdash; COMPLETADO &mdash; 17 mejoras</div>
+      <div class="tfinal-sec fy">RED:</div><div class="tok-inline">Nagle | DNS | QoS DSCP 46 | Throttling OFF</div>
+      <div class="tfinal-sec fc" style="margin-top:4px">SISTEMA:</div><div class="tok-inline">GPU Priority | Game Mode | SysMain OFF | Game Bar OFF</div>
+      <div class="twarn" style="margin-top:8px">Reinicia el PC para aplicar los cambios.</div>
+      <div style="margin-top:8px;color:#1a1d2e;font-size:10px">Presiona cualquier tecla... <span class="cursor"></span></div>
+    </div>
+  </div>
+</div>
+<div class="dl-bar"><button class="btn btn-primary" style="display:inline-flex;max-width:240px;" onclick="downloadV(2)">&#11015; <span data-es="Descargar Vol.2" data-en="Download Vol.2">Descargar Vol.2</span></button></div>
+</div>
+</div>
 
-        // Cerrar modal con tecla Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closePreview();
-        });
-    </script>
+<!-- ======== PREVIEW V3 ======== -->
+<div id="view-v3" class="view">
+<div class="preview-header">
+  <button class="back-btn" onclick="showHome()">&#8592; <span data-es="Volver" data-en="Back">Volver</span></button>
+  <span class="preview-title">VOL. 3 &mdash; COMPLETO (FIXED)</span>
+</div>
+<div class="terminal-wrap">
+<div class="monitor">
+  <div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">PowerShell &mdash; KaraClan_v3_fixed.ps1</span></div>
+  <div class="terminal">
+    <div class="banner">&#9608;&#9608; KARA CLAN &mdash; OPTIMIZADOR v3 FIXED &#9608;&#9608;</div>
+    <div class="t-sub">  Servicios | Registro | Disco | Memoria</div>
+    <div class="t-div">  -------------------------------------------------------------------</div>
+    <div class="t-boot">  Iniciando Vol.3...</div>
+    <div><span class="tsec tsec-s">SERVICIOS</span></div>
+    <div class="trow d1"><span class="tnum tn-s">01</span><span class="trow-txt">Desactivando servicios innecesarios...</span></div>
+    <div class="tok d2">OFF: Telemetria</div>
+    <div class="tok d3">OFF: Informe errores</div>
+    <div class="tok d4">OFF: Cola impresion</div>
+    <div class="tskip d5">N/A: WAP Push</div>
+    <div class="tok d6">OFF: Xbox Live Auth + Game Save</div>
+    <div class="tok d7">OFF: Mapas + Geolocalizacion</div>
+    <div class="tok d8">OFF: Registro remoto</div>
+    <div style="margin-top:6px"><span class="tsec tsec-r">REGISTRO</span></div>
+    <div class="trow d9"><span class="tnum tn-r">02</span><span class="trow-txt">Animaciones UI OFF</span></div>
+    <div class="tok d10">Al minimo</div>
+    <div class="trow d11"><span class="tnum tn-r">03</span><span class="trow-txt">CPU Priority = 38</span></div>
+    <div class="tok d12">38</div>
+    <div class="trow d13"><span class="tnum tn-r">04</span><span class="trow-txt">Cortana OFF</span></div>
+    <div class="tok d14">OFF</div>
+    <div class="trow d15"><span class="tnum tn-r">05</span><span class="trow-txt">Apagado rapido 2s</span></div>
+    <div class="tok d16">2s</div>
+    <div class="trow d17"><span class="tnum tn-r">06</span><span class="trow-txt">Tips + AutoPlay + Ubicacion OFF</span></div>
+    <div class="tok d18">Todo OFF</div>
+    <div style="margin-top:6px"><span class="tsec tsec-d">DISCO</span></div>
+    <div class="trow d19"><span class="tnum tn-d">10</span><span class="trow-txt">Archivos temporales</span></div>
+    <div class="tok d20">~1247 MB liberados</div>
+    <div class="trow d21"><span class="tnum tn-d">11</span><span class="trow-txt">Cache Windows Update</span></div>
+    <div class="tok d22">Limpiada</div>
+    <div class="trow d23"><span class="tnum tn-d">12</span><span class="trow-txt">TRIM SSD + Indexacion OFF</span></div>
+    <div class="tok d24">OK</div>
+    <div style="margin-top:6px"><span class="tsec tsec-m">MEMORIA</span></div>
+    <div class="trow d25"><span class="tnum tn-m">16</span><span class="trow-txt">PageFile + LargeCache + Heap + DLL</span></div>
+    <div class="tok d26">Todo optimizado</div>
+    <div class="trow d27"><span class="tnum tn-m">18</span><span class="trow-txt">Compresion memoria OFF</span></div>
+    <div class="tok d28">OFF</div>
+    <div class="tfinal dfinal">
+      <div class="tfinal-title">&#10003; KARA CLAN &mdash; VOL.3 COMPLETADO &mdash; 20 mejoras</div>
+      <div class="tfinal-sec fy">SERVICIOS:</div><div class="tok-inline">Telemetria | Xbox | Impresora | Mapas | Geoloc.</div>
+      <div class="tfinal-sec fc" style="margin-top:3px">REGISTRO:</div><div class="tok-inline">Animaciones | CPU Priority | Cortana | Tips | AutoPlay</div>
+      <div class="tfinal-sec fg" style="margin-top:3px">DISCO:</div><div class="tok-inline">Temp | WU cache | TRIM | Indexacion | NTFS</div>
+      <div class="tfinal-sec fm" style="margin-top:3px">MEMORIA:</div><div class="tok-inline">Compresion OFF | LargeCache OFF | Heap | DLL unload</div>
+      <div class="twarn" style="margin-top:8px">Reinicia el PC para aplicar los cambios.</div>
+      <div style="margin-top:8px;color:#1a1d2e;font-size:10px">Presiona cualquier tecla... <span class="cursor"></span></div>
+    </div>
+  </div>
+</div>
+<div class="dl-bar"><button class="btn btn-primary" style="display:inline-flex;max-width:240px;" onclick="downloadV(3)">&#11015; <span data-es="Descargar Vol.3" data-en="Download Vol.3">Descargar Vol.3</span></button></div>
+</div>
+</div>
+
+<!-- ======== PREVIEW RESET ======== -->
+<div id="view-reset" class="view">
+<div class="preview-header">
+  <button class="back-btn" onclick="showHome()">&#8592; <span data-es="Volver" data-en="Back">Volver</span></button>
+  <span class="preview-title" style="color:#e57373;">RESET OPTIMIZER</span>
+</div>
+<div class="terminal-wrap">
+<div class="monitor">
+  <div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">PowerShell &mdash; KaraClan_Reset_Optimizer.ps1</span></div>
+  <div class="terminal">
+    <div class="banner red">&#9608;&#9608; KARA CLAN &mdash; RESET OPTIMIZER &#9608;&#9608;</div>
+    <div class="t-sub red">  Revirtiendo todas las optimizaciones...</div>
+    <div class="t-div">  ================================================================</div>
+    <div class="t-boot">  Iniciando proceso de reset...</div>
+    <div><span class="tsec tsec-x">RED</span></div>
+    <div class="trow d1"><span class="tnum tn-x">1</span><span class="trow-txt">Restaurando Nagle (TcpAckFrequency)...</span></div>
+    <div class="tok d2">Nagle restaurado en 8 interfaces</div>
+    <div class="trow d3"><span class="tnum tn-x">2</span><span class="trow-txt">DNS automatico (DHCP)...</span></div>
+    <div class="tok d4">DNS automatico en 2 adaptadores</div>
+    <div class="trow d5"><span class="tnum tn-x">3</span><span class="trow-txt">QoS Gaming OFF...</span></div>
+    <div class="tok d6">QoS Gaming eliminado</div>
+    <div class="trow d7"><span class="tnum tn-x">4</span><span class="trow-txt">NetworkThrottlingIndex ON...</span></div>
+    <div class="tok d8">Restaurado</div>
+    <div style="margin-top:6px"><span class="tsec tsec-x">SISTEMA</span></div>
+    <div class="trow d9"><span class="tnum tn-x">5</span><span class="trow-txt">Plan de energia Equilibrado...</span></div>
+    <div class="tok d10">Plan Equilibrado</div>
+    <div class="trow d11"><span class="tnum tn-x">6</span><span class="trow-txt">Hibernacion ON...</span></div>
+    <div class="tok d12">ON</div>
+    <div class="trow d13"><span class="tnum tn-x">7</span><span class="trow-txt">GPU Priority restaurada...</span></div>
+    <div class="tok d14">Restaurada</div>
+    <div class="trow d15"><span class="tnum tn-x">8</span><span class="trow-txt">Game Bar ON + SysMain ON...</span></div>
+    <div class="tok d16">Restaurados</div>
+    <div style="margin-top:6px"><span class="tsec tsec-x">SERVICIOS</span></div>
+    <div class="trow d17"><span class="tnum tn-x">9</span><span class="trow-txt">Restaurando servicios desactivados...</span></div>
+    <div class="tok d18">OK: Telemetria</div>
+    <div class="tok d19">OK: Informe errores</div>
+    <div class="tok d20">OK: Cola impresion</div>
+    <div class="tok d21">OK: Xbox Live + Mapas + Geoloc.</div>
+    <div style="margin-top:6px"><span class="tsec tsec-x">REGISTRO + DISCO</span></div>
+    <div class="trow d22"><span class="tnum tn-x">10</span><span class="trow-txt">Animaciones UI restauradas...</span></div>
+    <div class="tok d23">Restauradas</div>
+    <div class="trow d24"><span class="tnum tn-x">11</span><span class="trow-txt">Tiempos apagado por defecto...</span></div>
+    <div class="tok d25">20s default</div>
+    <div class="trow d26"><span class="tnum tn-x">12</span><span class="trow-txt">Indexacion + 8.3 + LastAccess ON...</span></div>
+    <div class="tok d27">Restaurados</div>
+    <div class="trow d28"><span class="tnum tn-x">13</span><span class="trow-txt">Compresion memoria ON...</span></div>
+    <div class="tok d29">ON</div>
+    <div class="tfinal dfinal red">
+      <div class="tfinal-title red">&#10003; KARA CLAN &mdash; RESET COMPLETADO &mdash; Todo revertido</div>
+      <div class="tfinal-sec fx">REVERTIDO:</div><div class="tok-inline">Red | Sistema | Servicios | Registro | Disco | Memoria</div>
+      <div class="twarn" style="margin-top:8px">Reinicia el PC para aplicar los cambios.</div>
+      <div style="margin-top:8px;color:#1a1d2e;font-size:10px">Presiona cualquier tecla... <span class="cursor"></span></div>
+    </div>
+  </div>
+</div>
+<div class="dl-bar"><button class="btn btn-reset" style="display:inline-flex;max-width:260px;" onclick="downloadReset()">&#9099; <span data-es="Descargar Reset" data-en="Download Reset">Descargar Reset</span></button></div>
+</div>
+</div>
+
+<script>
+var scripts = [
+`# ================================================================
+#   KaraClan_OptimizarWindows_v1.ps1
+#   Kara Clan - Distribucion gratuita
+#   Ejecutar como Administrador
+# ================================================================
+$Host.UI.RawUI.WindowTitle = "Kara Clan - Optimizador v1"
+$Host.UI.RawUI.BackgroundColor = "Black"
+Clear-Host
+function Write-Header { Clear-Host; Write-Host "==========================================" -ForegroundColor Cyan; Write-Host "   KARA CLAN - OPTIMIZADOR v1" -ForegroundColor Cyan; Write-Host "   Red y Rendimiento - Windows 10/11" -ForegroundColor DarkCyan; Write-Host "==========================================" -ForegroundColor Cyan; Write-Host "" }
+function Write-OK   { Write-Host "  [OK] $args" -ForegroundColor Green }
+function Write-INFO { Write-Host "  [>>] $args" -ForegroundColor Yellow }
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Write-Host "  [ERROR] Ejecuta como Administrador." -ForegroundColor Red; pause; exit }
+Write-Header
+Write-INFO "TcpAckFrequency + TCPNoDelay..."
+$ifaces = Get-ChildItem "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces"
+foreach ($i in $ifaces) { Set-ItemProperty -Path $i.PSPath -Name "TcpAckFrequency" -Value 1 -Type DWord -Force -EA SilentlyContinue; Set-ItemProperty -Path $i.PSPath -Name "TCPNoDelay" -Value 1 -Type DWord -Force -EA SilentlyContinue }
+Write-OK "Nagle OFF en $($ifaces.Count) interfaces"
+Write-INFO "Plan Alto Rendimiento..."
+powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c 2>$null
+Write-OK "Alto Rendimiento activado"
+Write-INFO "DNS Cloudflare 1.1.1.1..."
+$adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" }
+foreach ($a in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $a.InterfaceIndex -ServerAddresses ("1.1.1.1","1.0.0.1") -EA SilentlyContinue }
+Write-OK "DNS configurado en $($adapters.Count) adaptadores"
+Write-INFO "Flush DNS..."
+ipconfig /flushdns | Out-Null
+Write-OK "Cache DNS limpiada"
+Write-INFO "Optimizacion Distribucion OFF..."
+$doPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization"
+if (-not (Test-Path $doPath)) { New-Item -Path $doPath -Force | Out-Null }
+Set-ItemProperty -Path $doPath -Name "DODownloadMode" -Value 0 -Type DWord -Force
+Write-OK "P2P Updates OFF"
+Write-INFO "Limite BG 1 Mbps..."
+$doPath2 = "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Settings"
+if (-not (Test-Path $doPath2)) { New-Item -Path $doPath2 -Force | Out-Null }
+Set-ItemProperty -Path $doPath2 -Name "DownloadRateBackgroundBps" -Value 125000 -Type DWord -Force
+Write-OK "Limite: 1 Mbps"
+Write-INFO "Telemetria OFF..."
+$telPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"
+if (-not (Test-Path $telPath)) { New-Item -Path $telPath -Force | Out-Null }
+Set-ItemProperty -Path $telPath -Name "AllowTelemetry" -Value 0 -Type DWord -Force -EA SilentlyContinue
+Write-OK "Telemetria OFF"
+Write-INFO "Apps BG OFF..."
+Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications" -Name "GlobalUserDisabled" -Value 1 -Type DWord -Force -EA SilentlyContinue
+Write-OK "Apps BG OFF"
+Write-Host ""; Write-Host "==========================================" -ForegroundColor Cyan; Write-Host "   KARA CLAN - COMPLETADO - 8 mejoras" -ForegroundColor Green; Write-Host "==========================================" -ForegroundColor Cyan; Write-Host ""; Write-Host "  Reinicia el PC para aplicar los cambios." -ForegroundColor Yellow; Write-Host ""; pause`,
+`# ================================================================
+#   KaraClan_OptimizarWindows_v2.ps1
+#   Kara Clan - Distribucion gratuita
+#   Ejecutar como Administrador
+# ================================================================
+$ErrorActionPreference = 'SilentlyContinue'
+$Host.UI.RawUI.WindowTitle = "Kara Clan - Optimizador v2"
+$Host.UI.RawUI.BackgroundColor = "Black"
+Clear-Host
+function Write-Step { param([string]$n,[string]$t); Write-Host "  " -NoNewline; Write-Host " $n " -BackgroundColor Cyan -ForegroundColor Black -NoNewline; Write-Host "  $t" -ForegroundColor White }
+function Write-OK   { Write-Host "       OK  $args" -ForegroundColor Green }
+function Write-WARN { Write-Host "     WARN  $args" -ForegroundColor Yellow }
+function Write-Div  { Write-Host "  ----------------------------------------------------------" -ForegroundColor DarkGray }
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Write-Host "  ERROR - Ejecuta como Administrador." -ForegroundColor Red; pause; exit }
+Write-Host ""; Write-Host "  KARA CLAN - OPTIMIZADOR v2" -ForegroundColor Cyan; Write-Div; Write-Host ""
+Write-Host "  [ RED ]" -ForegroundColor Cyan; Write-Div
+Write-Step "1" "TcpAckFrequency + TCPNoDelay"; $ifaces = Get-ChildItem "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces"; foreach ($i in $ifaces) { Set-ItemProperty -Path $i.PSPath -Name "TcpAckFrequency" -Value 1 -Type DWord -Force; Set-ItemProperty -Path $i.PSPath -Name "TCPNoDelay" -Value 1 -Type DWord -Force }; Write-OK "Aplicado en $($ifaces.Count) interfaces"
+Write-Step "2" "DNS Cloudflare 1.1.1.1"; $adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" }; foreach ($a in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $a.InterfaceIndex -ServerAddresses ("1.1.1.1","1.0.0.1") }; Write-OK "$($adapters.Count) adaptadores"
+Write-Step "3" "Flush DNS"; ipconfig /flushdns | Out-Null; Write-OK "Limpiada"
+Write-Step "4" "Distribucion OFF"; $p = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization"; if (-not (Test-Path $p)) { New-Item -Path $p -Force | Out-Null }; Set-ItemProperty -Path $p -Name "DODownloadMode" -Value 0 -Type DWord -Force; Write-OK "OFF"
+Write-Step "5" "Limite BG 1 Mbps"; $p2 = "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Settings"; if (-not (Test-Path $p2)) { New-Item -Path $p2 -Force | Out-Null }; Set-ItemProperty -Path $p2 -Name "DownloadRateBackgroundBps" -Value 125000 -Type DWord -Force; Write-OK "1 Mbps"
+Write-Step "6" "QoS DSCP 46"; $q = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\Gaming"; if (-not (Test-Path $q)) { New-Item -Path $q -Force | Out-Null }; Set-ItemProperty -Path $q -Name "Version" -Value "1.0" -Force; Set-ItemProperty -Path $q -Name "Protocol" -Value "*" -Force; Set-ItemProperty -Path $q -Name "Application Name" -Value "*" -Force; Set-ItemProperty -Path $q -Name "Local Port" -Value "*" -Force; Set-ItemProperty -Path $q -Name "Local IP" -Value "*" -Force; Set-ItemProperty -Path $q -Name "Remote Port" -Value "*" -Force; Set-ItemProperty -Path $q -Name "Remote IP" -Value "*" -Force; Set-ItemProperty -Path $q -Name "DSCP Value" -Value "46" -Force; Set-ItemProperty -Path $q -Name "Throttle Rate" -Value "-1" -Force; Write-OK "DSCP 46"
+Write-Step "7" "Reserva QoS 0%"; $ql = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Psched"; if (-not (Test-Path $ql)) { New-Item -Path $ql -Force | Out-Null }; Set-ItemProperty -Path $ql -Name "NonBestEffortLimit" -Value 0 -Type DWord -Force; Write-OK "0%"
+Write-Step "8" "NetworkThrottlingIndex OFF"; $mm = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile"; Set-ItemProperty -Path $mm -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force; Set-ItemProperty -Path $mm -Name "SystemResponsiveness" -Value 0 -Type DWord -Force; Write-OK "OFF"
+Write-Host ""; Write-Host "  [ SISTEMA ]" -ForegroundColor Magenta; Write-Div
+Write-Step "9"  "Alto Rendimiento"; powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c 2>$null; Write-OK "ON"
+Write-Step "10" "Hibernacion OFF"; powercfg -h off 2>$null; Write-OK "OFF"
+Write-Step "11" "GPU Priority 8"; $gp = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games"; if (-not (Test-Path $gp)) { New-Item -Path $gp -Force | Out-Null }; Set-ItemProperty -Path $gp -Name "GPU Priority" -Value 8 -Type DWord -Force; Set-ItemProperty -Path $gp -Name "Priority" -Value 6 -Type DWord -Force; Set-ItemProperty -Path $gp -Name "Scheduling Category" -Value "High" -Force; Write-OK "GPU 8 | CPU 6"
+Write-Step "12" "Telemetria OFF"; $tel = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"; if (-not (Test-Path $tel)) { New-Item -Path $tel -Force | Out-Null }; Set-ItemProperty -Path $tel -Name "AllowTelemetry" -Value 0 -Type DWord -Force; Write-OK "OFF"
+Write-Step "13" "BG Apps OFF"; Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications" -Name "GlobalUserDisabled" -Value 1 -Type DWord -Force; Write-OK "OFF"
+Write-Step "14" "Game Bar OFF"; Set-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR" -Name "AppCaptureEnabled" -Value 0 -Type DWord -Force; $gd = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR"; if (-not (Test-Path $gd)) { New-Item -Path $gd -Force | Out-Null }; Set-ItemProperty -Path $gd -Name "AllowGameDVR" -Value 0 -Type DWord -Force; Write-OK "OFF"
+Write-Step "15" "Game Mode ON"; $gm = "HKCU:\\SOFTWARE\\Microsoft\\GameBar"; if (-not (Test-Path $gm)) { New-Item -Path $gm -Force | Out-Null }; Set-ItemProperty -Path $gm -Name "AutoGameModeEnabled" -Value 1 -Type DWord -Force; Write-OK "ON"
+Write-Step "16" "SysMain OFF"; Stop-Service "SysMain" -Force; Set-Service "SysMain" -StartupType Disabled; Write-OK "OFF"
+Write-Step "17" "Search Manual"; Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WSearch" -Name "Start" -Value 3 -Type DWord -Force; Write-OK "Manual"
+Write-Host ""; Write-Host "  KARA CLAN - COMPLETADO - 17 mejoras" -ForegroundColor Green; Write-Host ""; Write-WARN "Reinicia el PC."; Write-Host ""; pause`,
+`# ================================================================
+#   KaraClan_OptimizarWindows_v3_fixed.ps1
+#   Kara Clan - Distribucion gratuita
+#   Ejecutar como Administrador
+# ================================================================
+$ErrorActionPreference = 'SilentlyContinue'
+$Host.UI.RawUI.WindowTitle = "Kara Clan - Optimizador v3"
+$Host.UI.RawUI.BackgroundColor = "Black"
+Clear-Host
+function Write-Step { param([string]$n,[string]$t); Write-Host "  " -NoNewline; Write-Host " $n " -BackgroundColor Yellow -ForegroundColor Black -NoNewline; Write-Host "  $t" -ForegroundColor White }
+function Write-OK   { param([string]$msg); Write-Host "       OK  $msg" -ForegroundColor Green }
+function Write-SKIP { param([string]$msg); Write-Host "     SKIP  $msg" -ForegroundColor DarkGray }
+function Write-WARN { param([string]$msg); Write-Host "     WARN  $msg" -ForegroundColor Yellow }
+function Write-Div  { Write-Host "  -------------------------------------------------------------------" -ForegroundColor DarkGray }
+function Disable-Svc { param([string]$name,[string]$label); try { $s = Get-Service -Name $name -EA Stop; if ($s.StartType -ne 'Disabled') { Stop-Service -Name $name -Force -EA SilentlyContinue; Set-Service -Name $name -StartupType Disabled -EA SilentlyContinue; Write-OK "OFF: $label" } else { Write-SKIP "Ya OFF: $label" } } catch { Write-SKIP "N/A: $label" } }
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Write-Host "  ERROR - Ejecuta como Administrador." -ForegroundColor Red; pause; exit }
+Write-Host ""; Write-Host "  KARA CLAN - OPTIMIZADOR v3 FIXED" -ForegroundColor Yellow; Write-Host "  Servicios | Registro | Disco | Memoria" -ForegroundColor DarkYellow; Write-Div; Write-Host ""
+Write-Host "  [ SERVICIOS ]" -ForegroundColor Yellow; Write-Div
+Disable-Svc "DiagTrack" "Telemetria"; Disable-Svc "dmwappushservice" "WAP Push"; Disable-Svc "WerSvc" "Informe errores"; Disable-Svc "wercplsupport" "Panel errores"
+Disable-Svc "Spooler" "Cola impresion"; Disable-Svc "PrintNotify" "Notif impresora"; Disable-Svc "Fax" "Fax"
+Disable-Svc "TabletInputService" "Tablet Input"; Disable-Svc "TapiSrv" "Telefonia"
+Disable-Svc "XblAuthManager" "Xbox Auth"; Disable-Svc "XblGameSave" "Xbox Game Save"; Disable-Svc "XboxNetApiSvc" "Xbox Net"; Disable-Svc "XboxGipSvc" "Xbox Accessory"
+Disable-Svc "MapsBroker" "Mapas"; Disable-Svc "lfsvc" "Geolocalizacion"; Disable-Svc "SharedAccess" "ICS"
+Disable-Svc "RemoteRegistry" "Registro remoto"; Disable-Svc "RetailDemo" "Demo tienda"; Disable-Svc "WMPNetworkSvc" "WMP red"; Disable-Svc "icssvc" "WiFi movil"
+Write-Host ""; Write-Host "  [ REGISTRO ]" -ForegroundColor Cyan; Write-Div
+Write-Step "02" "Animaciones UI OFF"; $vfx = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects"; if (-not (Test-Path $vfx)) { New-Item -Path $vfx -Force | Out-Null }; Set-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "UserPreferencesMask" -Value ([byte[]](0x90,0x12,0x03,0x80,0x10,0x00,0x00,0x00)); Set-ItemProperty -Path $vfx -Name "VisualFXSetting" -Value 2 -Type DWord -Force; Write-OK "OFF"
+Write-Step "03" "CPU Priority 38"; Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl" -Name "Win32PrioritySeparation" -Value 38 -Type DWord -Force; Write-OK "38"
+Write-Step "04" "Cortana OFF"; $cp = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search"; if (-not (Test-Path $cp)) { New-Item -Path $cp -Force | Out-Null }; Set-ItemProperty -Path $cp -Name "AllowCortana" -Value 0 -Type DWord -Force; Write-OK "OFF"
+Write-Step "05" "RestartApps OFF"; Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon" -Name "RestartApps" -Value 0 -Type DWord -Force; Write-OK "OFF"
+Write-Step "06" "Apagado 2s"; Set-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "WaitToKillAppTimeout" -Value "2000" -Force; Set-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "HungAppTimeout" -Value "1000" -Force; Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control" -Name "WaitToKillServiceTimeout" -Value "2000" -Force; Write-OK "2s"
+Write-Step "07" "Tips OFF"; $tp = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager"; if (-not (Test-Path $tp)) { New-Item -Path $tp -Force | Out-Null }; @("SubscribedContent-338389Enabled","SubscribedContent-310093Enabled","SoftLandingEnabled") | ForEach-Object { Set-ItemProperty -Path $tp -Name $_ -Value 0 -Type DWord -Force }; Write-OK "OFF"
+Write-Step "08" "AutoPlay OFF"; $ap = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers"; if (-not (Test-Path $ap)) { New-Item -Path $ap -Force | Out-Null }; Set-ItemProperty -Path $ap -Name "DisableAutoplay" -Value 1 -Type DWord -Force; Write-OK "OFF"
+Write-Step "09" "Ubicacion OFF"; $lp = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors"; if (-not (Test-Path $lp)) { New-Item -Path $lp -Force | Out-Null }; Set-ItemProperty -Path $lp -Name "DisableLocation" -Value 1 -Type DWord -Force; Write-OK "OFF"
+Write-Host ""; Write-Host "  [ DISCO ]" -ForegroundColor Green; Write-Div
+Write-Step "10" "Temporales"; $tf=0; foreach ($f in @($env:TEMP,"C:\\Windows\\Temp","C:\\Windows\\Prefetch")) { if (Test-Path $f) { $sz=(Get-ChildItem $f -Recurse -Force -EA SilentlyContinue|Measure-Object -Property Length -Sum -EA SilentlyContinue).Sum; Remove-Item "$f\\*" -Recurse -Force -EA SilentlyContinue; if($sz){$tf+=$sz} } }; Write-OK "~$([math]::Round($tf/1MB,1)) MB"
+Write-Step "11" "Cache WU"; Stop-Service "wuauserv" -Force; Remove-Item "C:\\Windows\\SoftwareDistribution\\Download\\*" -Recurse -Force -EA SilentlyContinue; Start-Service "wuauserv"; Write-OK "Limpiada"
+Write-Step "12" "TRIM SSD"; try { Optimize-Volume -DriveLetter C -ReTrim -Verbose:$false -EA Stop; Write-OK "TRIM C:" } catch { Write-SKIP "N/A" }
+Write-Step "13" "Indexacion OFF"; $drv=Get-CimInstance -Class Win32_Volume -Filter "DriveLetter='C:'" -EA SilentlyContinue; if($drv){$drv|Set-CimInstance -Property @{IndexingEnabled=$false} -EA SilentlyContinue; Write-OK "OFF"} else {Write-SKIP "N/A"}
+Write-Step "14" "8.3 OFF"; fsutil behavior set disable8dot3 1 | Out-Null; Write-OK "OFF"
+Write-Step "15" "LastAccess OFF"; fsutil behavior set disablelastaccess 1 | Out-Null; Write-OK "OFF"
+Write-Host ""; Write-Host "  [ MEMORIA ]" -ForegroundColor Magenta; Write-Div
+$mp = "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management"
+Write-Step "16" "ClearPageFile 0"; Set-ItemProperty -Path $mp -Name "ClearPageFileAtShutdown" -Value 0 -Type DWord -Force; Write-OK "0"
+Write-Step "17" "LargeSystemCache 0"; Set-ItemProperty -Path $mp -Name "LargeSystemCache" -Value 0 -Type DWord -Force; Write-OK "0"
+Write-Step "18" "Compresion OFF"; if(Get-Command Disable-MMAgent -EA SilentlyContinue){try{Disable-MMAgent -MemoryCompression -EA Stop;Write-OK "OFF"}catch{Write-SKIP "Error"}}else{Write-SKIP "N/A"}
+Write-Step "19" "Heap"; Set-ItemProperty -Path $mp -Name "HeapDeCommitFreeBlockThreshold" -Value 0x00040000 -Type DWord -Force; Write-OK "OK"
+Write-Step "20" "AlwaysUnloadDLL"; $ep="HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer"; if(-not(Test-Path $ep)){New-Item -Path $ep -Force|Out-Null}; Set-ItemProperty -Path $ep -Name "AlwaysUnloadDLL" -Value 1 -Type DWord -Force; Write-OK "ON"
+Write-Host ""; Write-Host "  KARA CLAN - VOL.3 COMPLETADO - 20 mejoras" -ForegroundColor Green; Write-Host ""; Write-WARN "Reinicia el PC."; Write-Host ""; pause`,
+`# ================================================================
+#   KaraClan_Reset_Optimizer.ps1
+#   Revierte TODOS los cambios de v1, v2 y v3
+#   Kara Clan - Distribucion gratuita
+#   Ejecutar como Administrador
+# ================================================================
+$ErrorActionPreference = 'SilentlyContinue'
+$Host.UI.RawUI.WindowTitle = "Kara Clan - Reset Optimizer"
+$Host.UI.RawUI.BackgroundColor = "Black"
+Clear-Host
+function Write-Step { param([string]$n,[string]$t); Write-Host "  " -NoNewline; Write-Host " $n " -BackgroundColor DarkRed -ForegroundColor White -NoNewline; Write-Host "  $t" -ForegroundColor White }
+function Write-OK   { param([string]$msg); Write-Host "       OK  $msg" -ForegroundColor Green }
+function Write-WARN { param([string]$msg); Write-Host "     WARN  $msg" -ForegroundColor Yellow }
+function Write-Div  { Write-Host "  -------------------------------------------------------------------" -ForegroundColor DarkGray }
+function Enable-Svc { param([string]$name,[string]$label,[string]$start="Automatic"); try { Set-Service -Name $name -StartupType $start -EA Stop; Start-Service -Name $name -EA SilentlyContinue; Write-OK "Restaurado: $label" } catch { Write-OK "N/A: $label" } }
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Write-Host "  ERROR - Ejecuta como Administrador." -ForegroundColor Red; pause; exit }
+Write-Host ""
+Write-Host "  ================================================================" -ForegroundColor DarkRed
+Write-Host "   KARA CLAN - RESET OPTIMIZER" -ForegroundColor Red
+Write-Host "   Revirtiendo todas las optimizaciones..." -ForegroundColor DarkRed
+Write-Host "  ================================================================" -ForegroundColor DarkRed
+Write-Host ""
+Write-Host "  [ RED ]" -ForegroundColor Cyan; Write-Div
+Write-Step "1" "Restaurando Nagle (TcpAckFrequency)..."
+$ifaces = Get-ChildItem "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces"
+foreach ($i in $ifaces) { Remove-ItemProperty -Path $i.PSPath -Name "TcpAckFrequency" -Force -EA SilentlyContinue; Remove-ItemProperty -Path $i.PSPath -Name "TCPNoDelay" -Force -EA SilentlyContinue }
+Write-OK "Nagle restaurado en $($ifaces.Count) interfaces"
+Write-Step "2" "DNS automatico (DHCP)..."
+$adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" }
+foreach ($a in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $a.InterfaceIndex -ResetServerAddresses -EA SilentlyContinue }
+Write-OK "DNS automatico en $($adapters.Count) adaptadores"
+Write-Step "3" "Flush DNS..."
+ipconfig /flushdns | Out-Null; Write-OK "Cache limpiada"
+Write-Step "4" "Optimizacion Distribucion ON..."
+$doPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization"
+if (Test-Path $doPath) { Remove-Item -Path $doPath -Recurse -Force }
+Write-OK "Restaurada"
+Write-Step "5" "Limite BG OFF..."
+$doPath2 = "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Settings"
+Remove-ItemProperty -Path $doPath2 -Name "DownloadRateBackgroundBps" -Force -EA SilentlyContinue
+Write-OK "Sin limite"
+Write-Step "6" "QoS Gaming OFF..."
+$q = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\Gaming"
+if (Test-Path $q) { Remove-Item -Path $q -Recurse -Force }
+Write-OK "QoS Gaming eliminado"
+Write-Step "7" "Reserva QoS restaurada..."
+$ql = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Psched"
+Remove-ItemProperty -Path $ql -Name "NonBestEffortLimit" -Force -EA SilentlyContinue
+Write-OK "Restaurada"
+Write-Step "8" "NetworkThrottlingIndex ON..."
+$mm = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile"
+Set-ItemProperty -Path $mm -Name "NetworkThrottlingIndex" -Value 10 -Type DWord -Force
+Set-ItemProperty -Path $mm -Name "SystemResponsiveness" -Value 20 -Type DWord -Force
+Write-OK "Restaurado"
+Write-Host ""; Write-Host "  [ SISTEMA ]" -ForegroundColor Magenta; Write-Div
+Write-Step "9" "Plan de energia Equilibrado..."
+powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e 2>$null
+Write-OK "Plan Equilibrado"
+Write-Step "10" "Hibernacion ON..."
+powercfg -h on 2>$null; Write-OK "ON"
+Write-Step "11" "GPU Priority restaurada..."
+$gp = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games"
+if (Test-Path $gp) { Remove-Item -Path $gp -Recurse -Force }
+Write-OK "Restaurada"
+Write-Step "12" "Telemetria ON..."
+$tel = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"
+Remove-ItemProperty -Path $tel -Name "AllowTelemetry" -Force -EA SilentlyContinue
+Write-OK "Restaurada"
+Write-Step "13" "Apps BG ON..."
+Remove-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications" -Name "GlobalUserDisabled" -Force -EA SilentlyContinue
+Write-OK "Restauradas"
+Write-Step "14" "Game Bar ON..."
+Set-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR" -Name "AppCaptureEnabled" -Value 1 -Type DWord -Force -EA SilentlyContinue
+$gd = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR"
+if (Test-Path $gd) { Remove-Item -Path $gd -Recurse -Force }
+Write-OK "Game Bar ON"
+Write-Step "15" "SysMain ON..."
+Set-Service "SysMain" -StartupType Automatic; Start-Service "SysMain" -EA SilentlyContinue; Write-OK "ON"
+Write-Step "16" "Windows Search automatico..."
+Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WSearch" -Name "Start" -Value 2 -Type DWord -Force; Start-Service "WSearch" -EA SilentlyContinue; Write-OK "Automatico"
+Write-Host ""; Write-Host "  [ SERVICIOS ]" -ForegroundColor Yellow; Write-Div
+Write-Step "17" "Restaurando servicios..."
+Enable-Svc "DiagTrack" "Telemetria" "Automatic"; Enable-Svc "WerSvc" "Informe errores" "Manual"
+Enable-Svc "Spooler" "Cola impresion" "Automatic"; Enable-Svc "XblAuthManager" "Xbox Auth" "Manual"
+Enable-Svc "XblGameSave" "Xbox Game Save" "Manual"; Enable-Svc "MapsBroker" "Mapas" "Automatic"
+Enable-Svc "lfsvc" "Geolocalizacion" "Manual"
+Write-Host ""; Write-Host "  [ REGISTRO ]" -ForegroundColor Cyan; Write-Div
+Write-Step "18" "Animaciones UI restauradas..."
+$vfx = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects"
+Set-ItemProperty -Path $vfx -Name "VisualFXSetting" -Value 0 -Type DWord -Force -EA SilentlyContinue
+Write-OK "Restauradas"
+Write-Step "19" "CPU Priority restaurado..."
+Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl" -Name "Win32PrioritySeparation" -Value 2 -Type DWord -Force; Write-OK "2 (default)"
+Write-Step "20" "Cortana ON..."
+$cp = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search"
+Remove-ItemProperty -Path $cp -Name "AllowCortana" -Force -EA SilentlyContinue; Write-OK "ON"
+Write-Step "21" "Tiempos apagado restaurados..."
+Set-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "WaitToKillAppTimeout" -Value "20000" -Force -EA SilentlyContinue
+Set-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "HungAppTimeout" -Value "5000" -Force -EA SilentlyContinue
+Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control" -Name "WaitToKillServiceTimeout" -Value "5000" -Force -EA SilentlyContinue
+Write-OK "Valores por defecto"
+Write-Step "22" "AutoPlay ON..."
+$ap = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers"
+Set-ItemProperty -Path $ap -Name "DisableAutoplay" -Value 0 -Type DWord -Force -EA SilentlyContinue; Write-OK "ON"
+Write-Step "23" "Ubicacion ON..."
+$lp = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors"
+Remove-ItemProperty -Path $lp -Name "DisableLocation" -Force -EA SilentlyContinue; Write-OK "ON"
+Write-Host ""; Write-Host "  [ DISCO + MEMORIA ]" -ForegroundColor Green; Write-Div
+Write-Step "24" "Indexacion C ON..."
+$drv=Get-CimInstance -Class Win32_Volume -Filter "DriveLetter='C:'" -EA SilentlyContinue
+if($drv){$drv|Set-CimInstance -Property @{IndexingEnabled=$true} -EA SilentlyContinue; Write-OK "ON"} else {Write-OK "N/A"}
+Write-Step "25" "Nombres 8.3 ON..."
+fsutil behavior set disable8dot3 0 | Out-Null; Write-OK "ON"
+Write-Step "26" "LastAccess ON..."
+fsutil behavior set disablelastaccess 0 | Out-Null; Write-OK "ON"
+Write-Step "27" "Compresion memoria ON..."
+if(Get-Command Enable-MMAgent -EA SilentlyContinue){try{Enable-MMAgent -MemoryCompression -EA Stop;Write-OK "ON"}catch{Write-OK "N/A"}}else{Write-OK "N/A"}
+Write-Step "28" "AlwaysUnloadDLL OFF..."
+$ep="HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer"
+Set-ItemProperty -Path $ep -Name "AlwaysUnloadDLL" -Value 0 -Type DWord -Force -EA SilentlyContinue; Write-OK "OFF"
+Write-Host ""
+Write-Host "  ================================================================" -ForegroundColor DarkRed
+Write-Host "   KARA CLAN - RESET COMPLETADO - Todo revertido" -ForegroundColor Red
+Write-Host "  ================================================================" -ForegroundColor DarkRed
+Write-Host ""; Write-WARN "Reinicia el PC para aplicar los cambios."; Write-Host ""; pause`
+];
+
+// ── STATS (localStorage) ─────────────────────────────────────
+var counts = {v1:0,v2:0,v3:0,reset:0};
+function loadCounts() {
+  try {
+    var saved = localStorage.getItem('kc_downloads');
+    if (saved) counts = JSON.parse(saved);
+  } catch(e) {}
+}
+function saveCounts() {
+  try { localStorage.setItem('kc_downloads', JSON.stringify(counts)); } catch(e) {}
+}
+function animateNum(el, target) {
+  var start = 0, dur = 1200, step = 16;
+  var inc = target / (dur / step);
+  var t = setInterval(function() {
+    start += inc;
+    if (start >= target) { start = target; clearInterval(t); }
+    el.textContent = Math.round(start).toLocaleString();
+  }, step);
+}
+function updateStats() {
+  loadCounts();
+  var total = counts.v1 + counts.v2 + counts.v3 + counts.reset;
+  animateNum(document.getElementById('dl-total'), total);
+  animateNum(document.getElementById('dl-v1'), counts.v1);
+  animateNum(document.getElementById('dl-v2'), counts.v2);
+  animateNum(document.getElementById('dl-v3'), counts.v3);
+  animateNum(document.getElementById('dl-reset'), counts.reset);
+}
+
+// ── NAVIGATION ───────────────────────────────────────────────
+function showHome() {
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.getElementById('view-home').classList.add('active');
+  window.scrollTo(0,0);
+  updateStats();
+}
+function showPreview(vol) {
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  var view = document.getElementById('view-'+vol);
+  view.classList.add('active');
+  window.scrollTo(0,0);
+  var t = view.querySelector('.terminal');
+  if (t) { var clone = t.cloneNode(true); t.parentNode.replaceChild(clone,t); }
+}
+
+// ── LANGUAGE ────────────────────────────────────────────────
+function setLang(lang) {
+  document.querySelectorAll('[data-'+lang+']').forEach(function(el){
+    el.textContent = el.getAttribute('data-'+lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    if (b.textContent === lang.toUpperCase()) b.classList.add('active');
+  });
+  try { localStorage.setItem('kc_lang', lang); } catch(e) {}
+}
+(function() {
+  try {
+    var saved = localStorage.getItem('kc_lang');
+    var sys = (navigator.language||'').toLowerCase();
+    var lang = saved || (sys.startsWith('es')?'es':sys.startsWith('en')?'en':'es');
+    if (lang !== 'es') setLang(lang);
+  } catch(e) {}
+})();
+
+// ── DOWNLOADS ───────────────────────────────────────────────
+function dl(filename, content, key) {
+  loadCounts();
+  counts[key] = (counts[key]||0) + 1;
+  saveCounts();
+  var blob = new Blob([content], {type:'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+function downloadV(n) {
+  var names = ['KaraClan_OptimizarWindows_v1.ps1','KaraClan_OptimizarWindows_v2.ps1','KaraClan_OptimizarWindows_v3_fixed.ps1'];
+  var keys  = ['v1','v2','v3'];
+  dl(names[n-1], scripts[n-1], keys[n-1]);
+}
+function downloadReset() {
+  dl('KaraClan_Reset_Optimizer.ps1', scripts[3], 'reset');
+}
+
+// Init stats on load
+updateStats();
+</script>
 </body>
 </html>
