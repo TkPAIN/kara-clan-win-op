@@ -283,32 +283,6 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
   </div>
 
   <!-- NEWSLETTER -->
-// ==================== NEWSLETTER ====================
-const newsletterForm = document.getElementById('newsletter-form');
-const newsletterIframe = document.getElementById('hidden_iframe_newsletter');
-const newsletterMsg = document.getElementById('newsletter-msg');
-
-if (newsletterForm) {
-  newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('newsletter-email').value;
-    if (!email || !email.includes('@')) {
-      newsletterMsg.textContent = '❌ Please enter a valid email';
-      newsletterMsg.style.color = '#e74c3c';
-      return;
-    }
-    
-    newsletterMsg.textContent = '✅ Subscribed! Check your email.';
-    newsletterMsg.style.color = '#4caf50';
-    
-    newsletterIframe.onload = () => {
-      document.getElementById('newsletter-email').value = '';
-      setTimeout(() => { newsletterMsg.textContent = ''; }, 4000);
-    };
-    
-    newsletterForm.submit();
-  });
-}
  <!-- NOTIFICACIONES VÍA TELEGRAM / DISCORD -->
 <div class="newsletter-section">
   <h4>📢 Stay updated</h4>
