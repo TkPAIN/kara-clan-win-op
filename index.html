@@ -367,6 +367,7 @@ async function loadStats() {
     document.getElementById('dl-v2').textContent = v2.toLocaleString();
     document.getElementById('dl-v3').textContent = v3.toLocaleString();
     
+    // Update chart
     if (chart) {
       chart.data.datasets[0].data = [v1, v2, v3];
       chart.update();
