@@ -283,15 +283,42 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
   </div>
 
   <!-- NEWSLETTER -->
-  <div class="newsletter-section">
-    <h4>📧 Get updates</h4>
-    <p style="font-size:10px;margin-bottom:12px;">Receive notifications when new versions are released</p>
-    <div class="newsletter-input">
-      <input type="email" id="newsletter-email" placeholder="Your email address">
-      <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
-    </div>
-    <div id="newsletter-msg" style="font-size:8px;margin-top:8px;color:var(--muted);"></div>
+// ==================== NEWSLETTER ====================
+const newsletterForm = document.getElementById('newsletter-form');
+const newsletterIframe = document.getElementById('hidden_iframe_newsletter');
+const newsletterMsg = document.getElementById('newsletter-msg');
+
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('newsletter-email').value;
+    if (!email || !email.includes('@')) {
+      newsletterMsg.textContent = '❌ Please enter a valid email';
+      newsletterMsg.style.color = '#e74c3c';
+      return;
+    }
+    
+    newsletterMsg.textContent = '✅ Subscribed! Check your email.';
+    newsletterMsg.style.color = '#4caf50';
+    
+    newsletterIframe.onload = () => {
+      document.getElementById('newsletter-email').value = '';
+      setTimeout(() => { newsletterMsg.textContent = ''; }, 4000);
+    };
+    
+    newsletterForm.submit();
+  });
+}
+ <!-- NOTIFICACIONES VÍA TELEGRAM / DISCORD -->
+<div class="newsletter-section">
+  <h4>📢 Stay updated</h4>
+  <p style="font-size:10px;margin-bottom:12px;">Join our community to receive notifications about new versions</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://web.telegram.org/a/" target="_blank" class="btn btn-primary" style="display:inline-flex;text-decoration:none;background:linear-gradient(135deg,#0088cc,#006699);border:none;">📱 Join Telegram</a>
+    <a href="https://discord.gg/6A6C7aRV" target="_blank" class="btn btn-discord" style="display:inline-flex;text-decoration:none;">💬 Join Discord</a>
   </div>
+  <p style="font-size:8px;color:var(--muted);margin-top:12px;">🔔 Get notified when new versions are released</p>
+</div>
 
   <!-- VERSIÓN PORTABLE -->
   <div class="portable-section">
@@ -359,21 +386,6 @@ function toggleFAQ(el) {
   answer.classList.toggle('show');
   const arrow = el.querySelector('span');
   if (arrow) arrow.textContent = answer.classList.contains('show') ? '▲' : '▼';
-}
-
-// ==================== NEWSLETTER ====================
-function subscribeNewsletter() {
-  const email = document.getElementById('newsletter-email').value;
-  const msg = document.getElementById('newsletter-msg');
-  if (!email || !email.includes('@')) {
-    msg.textContent = '❌ Please enter a valid email';
-    msg.style.color = '#e74c3c';
-    return;
-  }
-  msg.textContent = '✅ Thanks! (feature coming soon)';
-  msg.style.color = '#4caf50';
-  document.getElementById('newsletter-email').value = '';
-  setTimeout(() => { msg.textContent = ''; }, 3000);
 }
 
 // ==================== PORTABLE DOWNLOADS ====================
