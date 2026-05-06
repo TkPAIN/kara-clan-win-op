@@ -80,7 +80,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 .star-rating label:hover,.star-rating label:hover~label,.star-rating input:checked~label{color:var(--gold);text-shadow:0 0 4px rgba(201,168,76,.5);}
 .rating-feedback{font-size:11px;color:var(--muted);}
 .rating-feedback span{color:var(--gold2);}
-.user-info{background:var(--dark3);border-radius:6px;padding:10px;margin-bottom:15px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.user-info{background:#1a1a2a;border-radius:6px;padding:10px;margin-bottom:15px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .user-avatar{width:40px;height:40px;border-radius:50%;background:var(--discord);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;}
 .user-name{font-size:11px;color:var(--gold2);}
 
@@ -113,55 +113,44 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 </head>
 <body>
 
-<!-- HOME -->
 <div id="view-home" class="view active">
 <header>
   <img class="logo-img" src="data:image/jpeg;base64,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" alt="Kara Clan">
   <h1>Kara Clan</h1>
   <div class="lang-switcher">
-    <button class="lang-btn active" data-lang="es">ES</button>
-    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+    <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
   </div>
 </header>
 <main>
-  <div class="section-label" data-es="Selecciona una versión" data-en="Select a version">Selecciona una versión</div>
+  <div class="section-label" id="selectVersionLabel">Selecciona una versión</div>
   <div class="cards">
-    <div class="card"><div class="vol-badge">VOL. 1</div><h3 data-es="Esencial" data-en="Essential">Esencial</h3><p data-es="Red básica: Nagle OFF, DNS Cloudflare, plan de energía." data-en="Basic network: Nagle OFF, Cloudflare DNS, power plan.">Red básica: Nagle OFF, DNS Cloudflare, plan de energía.</p><div class="tag-list"><span class="tag">Nagle OFF</span><span class="tag">DNS Cloudflare</span><span class="tag" data-es="Energía" data-en="Power">Energía</span><span class="tag">8 mejoras</span></div><div class="card-actions"><button class="btn btn-primary" onclick="downloadV(1)">⬇ <span data-es="Descargar" data-en="Download">Descargar</span></button><button class="btn btn-ghost" onclick="showPreview('v1')">▶ Preview</button></div></div>
-    <div class="card"><div class="vol-badge">VOL. 2</div><h3 data-es="Avanzado" data-en="Advanced">Avanzado</h3><p data-es="Todo lo del Vol.1 más QoS, GPU Priority, Game Mode." data-en="Everything from Vol.1 plus QoS, GPU Priority, Game Mode.">Todo lo del Vol.1 más QoS, GPU Priority, Game Mode.</p><div class="tag-list"><span class="tag">QoS DSCP 46</span><span class="tag">GPU Priority</span><span class="tag">Game Mode</span><span class="tag">17 mejoras</span></div><div class="card-actions"><button class="btn btn-primary" onclick="downloadV(2)">⬇ <span data-es="Descargar" data-en="Download">Descargar</span></button><button class="btn btn-ghost" onclick="showPreview('v2')">▶ Preview</button></div></div>
-    <div class="card"><div class="vol-badge">VOL. 3 — FIXED</div><h3 data-es="Completo" data-en="Complete">Completo</h3><p data-es="Servicios, registro avanzado, disco y memoria." data-en="Services, advanced registry, disk and memory.">Servicios, registro avanzado, disco y memoria.</p><div class="tag-list"><span class="tag" data-es="Servicios" data-en="Services">Servicios</span><span class="tag" data-es="Registro" data-en="Registry">Registro</span><span class="tag">TRIM</span><span class="tag">20 mejoras</span></div><div class="card-actions"><button class="btn btn-primary" onclick="downloadV(3)">⬇ <span data-es="Descargar" data-en="Download">Descargar</span></button><button class="btn btn-ghost" onclick="showPreview('v3')">▶ Preview</button></div></div>
-    <div class="card reset-card"><div class="vol-badge reset" data-es="RESET" data-en="RESET">RESET</div><h3 data-es="Revertir Todo" data-en="Revert All">Revertir Todo</h3><p data-es="Deshace todos los cambios. Devuelve Windows a su estado original." data-en="Undoes all changes. Returns Windows to its original state.">Deshace todos los cambios. Devuelve Windows a su estado original.</p><div class="tag-list"><span class="tag red" data-es="Revierte todo" data-en="Reverts all">Revierte todo</span><span class="tag red">28 restauraciones</span></div><div class="card-actions"><button class="btn btn-reset" onclick="downloadReset()">⟳ <span data-es="Descargar Reset" data-en="Download Reset">Descargar Reset</span></button><button class="btn btn-ghost" onclick="showPreview('reset')">▶ Preview</button></div></div>
+    <div class="card"><div class="vol-badge">VOL. 1</div><h3 id="v1Title">Esencial</h3><p id="v1Desc">Red básica: Nagle OFF, DNS Cloudflare, plan de energía.</p><div class="tag-list"><span class="tag">Nagle OFF</span><span class="tag">DNS Cloudflare</span><span class="tag" id="v1Tag">Energía</span><span class="tag">8 mejoras</span></div><div class="card-actions"><button class="btn btn-primary" onclick="downloadV(1)">⬇ <span id="dl1Text">Descargar</span></button><button class="btn btn-ghost" onclick="showPreview('v1')">▶ Preview</button></div></div>
+    <div class="card"><div class="vol-badge">VOL. 2</div><h3 id="v2Title">Avanzado</h3><p id="v2Desc">Todo lo del Vol.1 más QoS, GPU Priority, Game Mode.</p><div class="tag-list"><span class="tag">QoS DSCP 46</span><span class="tag">GPU Priority</span><span class="tag">Game Mode</span><span class="tag">17 mejoras</span></div><div class="card-actions"><button class="btn btn-primary" onclick="downloadV(2)">⬇ <span id="dl2Text">Descargar</span></button><button class="btn btn-ghost" onclick="showPreview('v2')">▶ Preview</button></div></div>
+    <div class="card"><div class="vol-badge">VOL. 3 — FIXED</div><h3 id="v3Title">Completo</h3><p id="v3Desc">Servicios, registro avanzado, disco y memoria.</p><div class="tag-list"><span class="tag" id="v3Tag1">Servicios</span><span class="tag" id="v3Tag2">Registro</span><span class="tag">TRIM</span><span class="tag">20 mejoras</span></div><div class="card-actions"><button class="btn btn-primary" onclick="downloadV(3)">⬇ <span id="dl3Text">Descargar</span></button><button class="btn btn-ghost" onclick="showPreview('v3')">▶ Preview</button></div></div>
+    <div class="card reset-card"><div class="vol-badge reset" id="resetBadge">RESET</div><h3 id="resetTitle">Revertir Todo</h3><p id="resetDesc">Deshace todos los cambios. Devuelve Windows a su estado original.</p><div class="tag-list"><span class="tag red" id="resetTag">Revierte todo</span><span class="tag red">28 restauraciones</span></div><div class="card-actions"><button class="btn btn-reset" onclick="downloadReset()">⟳ <span id="resetBtnText">Descargar Reset</span></button><button class="btn btn-ghost" onclick="showPreview('reset')">▶ Preview</button></div></div>
   </div>
   <div class="ornament">◆ ─────── ◆ ─────── ◆</div>
 
-  <!-- STATS & REVIEWS -->
   <div class="stats-section" id="stats-section">
-    <div class="stats-title" data-es="Estadísticas &amp; Opiniones" data-en="Stats &amp; Reviews">Estadísticas &amp; Opiniones</div>
+    <div class="stats-title" id="statsTitle">Estadísticas &amp; Opiniones</div>
     <div class="stats-grid">
-      <div class="stat-box"><span class="stat-num" id="dl-total">—</span><span class="stat-label" data-es="Descargas totales" data-en="Total downloads">Descargas totales</span></div>
+      <div class="stat-box"><span class="stat-num" id="dl-total">—</span><span class="stat-label" id="totalLabel">Descargas totales</span></div>
       <div class="stat-box"><span class="stat-num" id="dl-v1">—</span><span class="stat-label">Vol. 1</span></div>
       <div class="stat-box"><span class="stat-num" id="dl-v2">—</span><span class="stat-label">Vol. 2</span></div>
       <div class="stat-box"><span class="stat-num" id="dl-v3">—</span><span class="stat-label">Vol. 3</span></div>
-      <div class="stat-box"><span class="stat-num" id="avg-rating">⭐ 0.0</span><span class="stat-label" data-es="Valoración media" data-en="Average rating">Valoración media</span></div>
+      <div class="stat-box"><span class="stat-num" id="avg-rating">⭐ 0.0</span><span class="stat-label" id="avgLabel">Valoración media</span></div>
     </div>
+    <div class="reviews-grid" id="reviews-grid"><div class="loading-text" id="loadingReviews">📝 Cargando reseñas...</div></div>
 
-    <div class="reviews-grid" id="reviews-grid"><div class="loading-text">📝 Cargando reseñas...</div></div>
-
-    <!-- FORMULARIO CON DISCORD LOGIN -->
     <div class="form-card">
-      <h3 data-es="Deja tu reseña" data-en="Leave your review">Deja tu reseña</h3>
-      
-      <!-- Estado de Discord -->
+      <h3 id="formTitle">Deja tu reseña</h3>
       <div id="discord-status" style="margin-bottom:15px;"></div>
-      
-      <!-- Botón de login con Discord -->
-      <div id="discord-login-btn" style="margin-bottom:15px;">
-        <button class="btn btn-discord" id="discord-login" style="width:100%;">💬 <span data-es="Iniciar sesión con Discord" data-en="Login with Discord">Iniciar sesión con Discord</span></button>
-      </div>
-      
+      <div id="discord-login-btn" style="margin-bottom:15px;"><button class="btn btn-discord" id="discord-login" style="width:100%;">💬 <span id="loginText">Iniciar sesión con Discord</span></button></div>
       <form id="review-form">
-        <div class="form-group"><label data-es="Nombre" data-en="Name">Nombre</label><input type="text" id="review-name" maxlength="40" placeholder="Tu nombre" required></div>
-        <div class="form-group"><label data-es="Versión usada" data-en="Volume used">Versión usada</label><select id="review-vol"><option value="Vol.3 — Completo">Vol.3 — Completo</option><option value="Vol.2 — Avanzado" selected>Vol.2 — Avanzado</option><option value="Vol.1 — Esencial">Vol.1 — Esencial</option></select></div>
-        <div class="rating-container"><label style="display:block;font-size:9px;margin-bottom:6px;" data-es="Puntuación" data-en="Rating">Puntuación</label>
+        <div class="form-group"><label id="nameLabel">Nombre</label><input type="text" id="review-name" maxlength="40" placeholder="Tu nombre" required></div>
+        <div class="form-group"><label id="volumeLabel">Versión usada</label><select id="review-vol"><option value="Vol.3 — Completo">Vol.3 — Completo</option><option value="Vol.2 — Avanzado" selected>Vol.2 — Avanzado</option><option value="Vol.1 — Esencial">Vol.1 — Esencial</option></select></div>
+        <div class="rating-container"><label id="ratingLabel" style="display:block;font-size:9px;margin-bottom:6px;">Puntuación</label>
           <div class="star-rating-wrap">
             <div class="star-rating">
               <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="5 estrellas">★</label>
@@ -170,100 +159,136 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
               <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 estrellas">★</label>
               <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 estrella">★</label>
             </div>
-            <div class="rating-feedback" id="ratingFeedback"><span>☆</span> <span data-es="No seleccionado" data-en="Not selected">No seleccionado</span></div>
+            <div class="rating-feedback" id="ratingFeedback"><span>☆</span> <span id="ratingNotSelected">No seleccionado</span></div>
           </div>
         </div>
-        <div class="form-group"><label data-es="Tu opinión" data-en="Your review">Tu opinión</label><textarea id="review-text" maxlength="500" rows="3" placeholder="Cuéntanos tu experiencia..." required></textarea></div>
-        <div class="form-actions"><button type="submit" class="btn btn-submit" id="submit-btn">📝 <span data-es="Enviar reseña" data-en="Submit review">Enviar reseña</span></button><span class="form-msg" id="form-msg"></span></div>
+        <div class="form-group"><label id="reviewLabel">Tu opinión</label><textarea id="review-text" maxlength="500" rows="3" placeholder="Cuéntanos tu experiencia..." required></textarea></div>
+        <div class="form-actions"><button type="submit" class="btn btn-submit" id="submit-btn">📝 <span id="submitText">Enviar reseña</span></button><span class="form-msg" id="form-msg"></span></div>
       </form>
     </div>
     <div style="text-align:center;font-size:9px;margin-top:8px;">Estadísticas desde GitHub Releases | Reseñas verificadas con Discord</div>
   </div>
-  <div class="info-list"><span data-es="Requiere PowerShell como Administrador" data-en="Requires PowerShell as Administrator">Requiere PowerShell como Administrador</span><br><span data-es="Compatible con Windows 10 / 11" data-en="Compatible with Windows 10 / 11">Compatible con Windows 10 / 11</span><br><span data-es="Gratuito — Kara Clan" data-en="Free — Kara Clan">Gratuito — Kara Clan</span></div>
+  <div class="info-list"><span id="adminMsg">Requiere PowerShell como Administrador</span><br><span id="compatMsg">Compatible con Windows 10 / 11</span><br><span id="freeMsg">Gratuito — Kara Clan</span></div>
 </main>
-<footer>Kara Clan — Distribución gratuita</footer>
+<footer id="footerText">Kara Clan — Distribución gratuita</footer>
 </div>
 
-<!-- PREVIEWS -->
 <div id="view-v1" class="view"><div class="preview-header"><button class="back-btn" onclick="showHome()">← Volver</button><span class="preview-title">VOL. 1</span></div><div class="terminal-wrap"><div class="monitor"><div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">KaraClan_v1.ps1</span></div><div class="terminal"><div class="banner">KARA CLAN v1</div><div class="tok d1">Nagle OFF aplicado</div><div class="tok d2">DNS Cloudflare configurado</div><div class="tok d3">Plan Alto Rendimiento activado</div><div class="tok d4">Telemetría desactivada</div><div class="tfinal"><div class="tfinal-title">✓ 8 mejoras aplicadas</div><div class="twarn">Reinicia el PC</div></div></div></div><div class="dl-bar"><button class="btn btn-primary" onclick="downloadV(1)">⬇ Descargar Vol.1</button></div></div></div>
 <div id="view-v2" class="view"><div class="preview-header"><button class="back-btn" onclick="showHome()">← Volver</button><span class="preview-title">VOL. 2</span></div><div class="terminal-wrap"><div class="monitor"><div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">KaraClan_v2.ps1</span></div><div class="terminal"><div class="banner">KARA CLAN v2</div><div class="tok d1">Nagle OFF + DNS</div><div class="tok d2">QoS DSCP 46 activado</div><div class="tok d3">GPU Priority 8</div><div class="tok d4">Game Mode ON</div><div class="tok d5">SysMain OFF</div><div class="tfinal"><div class="tfinal-title">✓ 17 mejoras aplicadas</div><div class="twarn">Reinicia el PC</div></div></div></div><div class="dl-bar"><button class="btn btn-primary" onclick="downloadV(2)">⬇ Descargar Vol.2</button></div></div></div>
 <div id="view-v3" class="view"><div class="preview-header"><button class="back-btn" onclick="showHome()">← Volver</button><span class="preview-title">VOL. 3</span></div><div class="terminal-wrap"><div class="monitor"><div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">KaraClan_v3_fixed.ps1</span></div><div class="terminal"><div class="banner">KARA CLAN v3</div><div class="tok d1">Servicios optimizados</div><div class="tok d2">Registro avanzado</div><div class="tok d3">TRIM + Indexación OFF</div><div class="tok d4">Memoria optimizada</div><div class="tfinal"><div class="tfinal-title">✓ 20 mejoras aplicadas</div><div class="twarn">Reinicia el PC</div></div></div></div><div class="dl-bar"><button class="btn btn-primary" onclick="downloadV(3)">⬇ Descargar Vol.3</button></div></div></div>
 <div id="view-reset" class="view"><div class="preview-header"><button class="back-btn" onclick="showHome()">← Volver</button><span class="preview-title">RESET</span></div><div class="terminal-wrap"><div class="monitor"><div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span class="titlebar-txt">KaraClan_Reset.ps1</span></div><div class="terminal"><div class="banner red">KARA CLAN RESET</div><div class="tok d1">Nagle restaurado</div><div class="tok d2">DNS automático</div><div class="tok d3">Servicios restaurados</div><div class="tfinal"><div class="tfinal-title">✓ Todo revertido</div><div class="twarn">Reinicia el PC</div></div></div></div><div class="dl-bar"><button class="btn btn-reset" onclick="downloadReset()">⟳ Descargar Reset</button></div></div></div>
 
 <script>
-// ==================== CONFIGURACIÓN ====================
-const WORKER_URL = 'https://kara-clan-review-bot.marcos238gn.workers.dev';
-const GITHUB_REPO = 'TkPAIN/kara-clan-win-op';
-
-// Estado de Discord
-let discordUser = null;
-let discordAvatar = null;
-let discordId = null;
-
-// ==================== IDIOMA ====================
-let currentLang = 'es';
-const translations = {
-  es: { name: 'Nombre', volume: 'Versión usada', review: 'Tu opinión', submit: 'Enviar reseña', rating: 'Puntuación', notSelected: 'No seleccionado', login: 'Iniciar sesión con Discord', logout: 'Cerrar sesión', loggedAs: 'Conectado como', verified: 'Verificado con Discord', anonymous: 'Modo anónimo', download: 'Descargar', preview: 'Preview', reset: 'Reset', essential: 'Esencial', advanced: 'Avanzado', complete: 'Completo', power: 'Energía', services: 'Servicios', registry: 'Registro', totalDownloads: 'Descargas totales', avgRating: 'Valoración media', selectVersion: 'Selecciona una versión', statsReviews: 'Estadísticas &amp; Opiniones', leaveReview: 'Deja tu reseña', yourName: 'Tu nombre', yourOpinion: 'Cuéntanos tu experiencia...', requiredAdmin: 'Requiere PowerShell como Administrador', compatible: 'Compatible con Windows 10 / 11', free: 'Gratuito — Kara Clan' },
-  en: { name: 'Name', volume: 'Volume used', review: 'Your review', submit: 'Submit review', rating: 'Rating', notSelected: 'Not selected', login: 'Login with Discord', logout: 'Logout', loggedAs: 'Logged as', verified: 'Verified with Discord', anonymous: 'Anonymous mode', download: 'Download', preview: 'Preview', reset: 'Reset', essential: 'Essential', advanced: 'Advanced', complete: 'Complete', power: 'Power', services: 'Services', registry: 'Registry', totalDownloads: 'Total downloads', avgRating: 'Average rating', selectVersion: 'Select a version', statsReviews: 'Stats &amp; Reviews', leaveReview: 'Leave your review', yourName: 'Your name', yourOpinion: 'Tell us about your experience...', requiredAdmin: 'Requires PowerShell as Administrator', compatible: 'Compatible with Windows 10 / 11', free: 'Free — Kara Clan' }
+// ==================== TRADUCCIONES ====================
+const texts = {
+  es: {
+    selectVersion: "Selecciona una versión", statsTitle: "Estadísticas &amp; Opiniones", totalLabel: "Descargas totales", avgLabel: "Valoración media",
+    loadingReviews: "📝 Cargando reseñas...", formTitle: "Deja tu reseña", nameLabel: "Nombre", volumeLabel: "Versión usada", ratingLabel: "Puntuación",
+    ratingNotSelected: "No seleccionado", reviewLabel: "Tu opinión", submitText: "Enviar reseña", loginText: "Iniciar sesión con Discord",
+    v1Title: "Esencial", v1Desc: "Red básica: Nagle OFF, DNS Cloudflare, plan de energía.", v1Tag: "Energía",
+    v2Title: "Avanzado", v2Desc: "Todo lo del Vol.1 más QoS, GPU Priority, Game Mode.",
+    v3Title: "Completo", v3Desc: "Servicios, registro avanzado, disco y memoria.", v3Tag1: "Servicios", v3Tag2: "Registro",
+    resetTitle: "Revertir Todo", resetDesc: "Deshace todos los cambios. Devuelve Windows a su estado original.", resetTag: "Revierte todo",
+    dl1Text: "Descargar", dl2Text: "Descargar", dl3Text: "Descargar", resetBtnText: "Descargar Reset",
+    adminMsg: "Requiere PowerShell como Administrador", compatMsg: "Compatible con Windows 10 / 11", freeMsg: "Gratuito — Kara Clan",
+    footerText: "Kara Clan — Distribución gratuita"
+  },
+  en: {
+    selectVersion: "Select a version", statsTitle: "Stats &amp; Reviews", totalLabel: "Total downloads", avgLabel: "Average rating",
+    loadingReviews: "📝 Loading reviews...", formTitle: "Leave your review", nameLabel: "Name", volumeLabel: "Volume used", ratingLabel: "Rating",
+    ratingNotSelected: "Not selected", reviewLabel: "Your review", submitText: "Submit review", loginText: "Login with Discord",
+    v1Title: "Essential", v1Desc: "Basic network: Nagle OFF, Cloudflare DNS, power plan.", v1Tag: "Power",
+    v2Title: "Advanced", v2Desc: "Everything from Vol.1 plus QoS, GPU Priority, Game Mode.",
+    v3Title: "Complete", v3Desc: "Services, advanced registry, disk and memory.", v3Tag1: "Services", v3Tag2: "Registry",
+    resetTitle: "Revert All", resetDesc: "Undoes all changes. Returns Windows to its original state.", resetTag: "Reverts all",
+    dl1Text: "Download", dl2Text: "Download", dl3Text: "Download", resetBtnText: "Download Reset",
+    adminMsg: "Requires PowerShell as Administrator", compatMsg: "Compatible with Windows 10 / 11", freeMsg: "Free — Kara Clan",
+    footerText: "Kara Clan — Free distribution"
+  }
 };
 
-function setLang(lang) {
+let currentLang = 'es';
+
+function setLanguage(lang) {
   currentLang = lang;
-  document.querySelectorAll('[data-es], [data-en]').forEach(el => {
-    const key = el.getAttribute(`data-${lang}`);
-    if (key) el.textContent = key;
-  });
+  const t = texts[lang];
+  document.getElementById('selectVersionLabel').innerHTML = t.selectVersion;
+  document.getElementById('statsTitle').innerHTML = t.statsTitle;
+  document.getElementById('totalLabel').innerHTML = t.totalLabel;
+  document.getElementById('avgLabel').innerHTML = t.avgLabel;
+  document.getElementById('loadingReviews').innerHTML = t.loadingReviews;
+  document.getElementById('formTitle').innerHTML = t.formTitle;
+  document.getElementById('nameLabel').innerHTML = t.nameLabel;
+  document.getElementById('volumeLabel').innerHTML = t.volumeLabel;
+  document.getElementById('ratingLabel').innerHTML = t.ratingLabel;
+  document.getElementById('ratingNotSelected').innerHTML = t.ratingNotSelected;
+  document.getElementById('reviewLabel').innerHTML = t.reviewLabel;
+  document.getElementById('submitText').innerHTML = t.submitText;
+  document.getElementById('loginText').innerHTML = t.loginText;
+  document.getElementById('v1Title').innerHTML = t.v1Title;
+  document.getElementById('v1Desc').innerHTML = t.v1Desc;
+  document.getElementById('v1Tag').innerHTML = t.v1Tag;
+  document.getElementById('v2Title').innerHTML = t.v2Title;
+  document.getElementById('v2Desc').innerHTML = t.v2Desc;
+  document.getElementById('v3Title').innerHTML = t.v3Title;
+  document.getElementById('v3Desc').innerHTML = t.v3Desc;
+  document.getElementById('v3Tag1').innerHTML = t.v3Tag1;
+  document.getElementById('v3Tag2').innerHTML = t.v3Tag2;
+  document.getElementById('resetTitle').innerHTML = t.resetTitle;
+  document.getElementById('resetDesc').innerHTML = t.resetDesc;
+  document.getElementById('resetTag').innerHTML = t.resetTag;
+  document.getElementById('dl1Text').innerHTML = t.dl1Text;
+  document.getElementById('dl2Text').innerHTML = t.dl2Text;
+  document.getElementById('dl3Text').innerHTML = t.dl3Text;
+  document.getElementById('resetBtnText').innerHTML = t.resetBtnText;
+  document.getElementById('adminMsg').innerHTML = t.adminMsg;
+  document.getElementById('compatMsg').innerHTML = t.compatMsg;
+  document.getElementById('freeMsg').innerHTML = t.freeMsg;
+  document.getElementById('footerText').innerHTML = t.footerText;
+  localStorage.setItem('kara_lang', lang);
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
-  localStorage.setItem('kc_lang', lang);
-  updateDiscordStatusText();
 }
 
-function updateDiscordStatusText() {
-  const statusDiv = document.getElementById('discord-status');
-  if (discordUser) {
-    statusDiv.innerHTML = `<div class="user-info"><div class="user-avatar">${discordUser.charAt(0).toUpperCase()}</div><div class="user-name">${translations[currentLang].loggedAs} <strong>${discordUser}</strong> ${translations[currentLang].verified}</div></div>`;
-  } else {
-    statusDiv.innerHTML = `<div class="user-info" style="background:#1a1a2a;"><div class="user-avatar" style="background:#555;">?</div><div class="user-name">${translations[currentLang].anonymous}</div></div>`;
-  }
-}
+// ==================== CONFIGURACIÓN ====================
+const WORKER_URL = 'https://kara-clan-review-bot.marcos238gn.workers.dev';
+let discordUser = null, discordId = null;
 
 // ==================== DISCORD LOGIN ====================
 function initDiscord() {
-  // Verificar si hay datos en URL (callback)
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('discord_login') === 'success') {
-    const user = urlParams.get('discord_user');
-    const avatar = urlParams.get('discord_avatar');
-    const id = urlParams.get('discord_id');
-    if (user && id) {
-      discordUser = decodeURIComponent(user);
-      discordAvatar = avatar;
-      discordId = id;
+    discordUser = decodeURIComponent(urlParams.get('discord_user') || '');
+    discordId = urlParams.get('discord_id') || '';
+    if (discordUser && discordId) {
       localStorage.setItem('discord_user', discordUser);
       localStorage.setItem('discord_id', discordId);
-      localStorage.setItem('discord_avatar', discordAvatar || '');
-      // Limpiar URL
-      window.history.replaceState({}, document.title, window.location.pathname);
     }
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
-  
-  // Recuperar de localStorage
   const savedUser = localStorage.getItem('discord_user');
   const savedId = localStorage.getItem('discord_id');
-  const savedAvatar = localStorage.getItem('discord_avatar');
   if (savedUser && savedId && !discordUser) {
     discordUser = savedUser;
     discordId = savedId;
-    discordAvatar = savedAvatar;
   }
-  
-  updateDiscordStatusText();
-  
-  // Botón de login
+  updateDiscordUI();
   document.getElementById('discord-login').onclick = () => {
     window.location.href = `${WORKER_URL}/auth/discord`;
   };
+}
+
+function updateDiscordUI() {
+  const statusDiv = document.getElementById('discord-status');
+  if (discordUser) {
+    statusDiv.innerHTML = `<div class="user-info"><div class="user-avatar">${discordUser.charAt(0).toUpperCase()}</div><div class="user-name">✅ Conectado como <strong>${discordUser}</strong> (verificado con Discord)</div></div>`;
+  } else {
+    statusDiv.innerHTML = `<div class="user-info"><div class="user-avatar">?</div><div class="user-name">🔓 Modo anónimo - <a href="#" id="login-link" style="color:var(--discord);">Inicia sesión con Discord</a> para verificar tu identidad</div></div>`;
+    document.getElementById('login-link')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = `${WORKER_URL}/auth/discord`;
+    });
+  }
 }
 
 // ==================== SCRIPTS ====================
@@ -299,14 +324,14 @@ async function loadReviews() {
     container.innerHTML = '';
     let totalStars = 0, count = 0;
     issues.forEach(issue => {
-      const titleParts = issue.title.split('—');
-      const name = (titleParts[0] || 'Usuario').replace('📝 Reseña de ', '').trim();
+      const titleParts = issue.title.replace('📝 Reseña de ', '').split('—');
+      const name = (titleParts[0] || 'Usuario').trim();
       const volume = (titleParts[1] || '').trim();
       const ratingMatch = issue.title.match(/(\d+)\s*[⭐★]+/);
       let rating = 0;
       if (ratingMatch) { rating = parseInt(ratingMatch[1]); totalStars += rating; count++; }
       const starsHtml = rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '☆☆☆☆☆';
-      const isVerified = issue.labels.some(l => l.name === 'verified-discord');
+      const isVerified = issue.labels?.some(l => l.name === 'verified-discord') || false;
       const reviewDiv = document.createElement('div'); reviewDiv.className = 'review';
       reviewDiv.innerHTML = `<div class="review-header"><div class="review-avatar ${isVerified ? 'discord-avatar' : ''}">${name.charAt(0).toUpperCase()}</div><div class="review-meta"><div class="review-name">${escapeHtml(name)}${isVerified ? '<span class="verified-badge">✓ Discord</span>' : ''}</div><div class="review-vol">${escapeHtml(volume)}</div></div><div class="review-stars">${starsHtml}</div></div><div class="review-text">${escapeHtml(issue.body || 'Sin comentario.').substring(0, 200)}</div>`;
       container.appendChild(reviewDiv);
@@ -342,7 +367,7 @@ document.getElementById('review-form').addEventListener('submit', async (e) => {
   if (!selectedRating) { msg.textContent = '⭐ Selecciona una puntuación'; msg.className = 'form-msg err'; return; }
   btn.disabled = true; btn.textContent = 'Enviando...';
   try {
-    const payload = { name, volume, rating: selectedRating, review, discordId, discordUsername: discordUser, discordAvatar };
+    const payload = { name, volume, rating: selectedRating, review, discordId, discordUsername: discordUser };
     const res = await fetch(`${WORKER_URL}/submit-review`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     const data = await res.json();
     if (data.success) {
@@ -352,7 +377,7 @@ document.getElementById('review-form').addEventListener('submit', async (e) => {
       selectedRating = ''; document.getElementById('ratingFeedback').innerHTML = '<span>☆</span> No seleccionado';
       loadReviews();
     } else { msg.textContent = '❌ Error: ' + (data.error || 'Intenta de nuevo'); msg.className = 'form-msg err'; }
-  } catch(err) { msg.textContent = '❌ Error de conexión'; msg.className = 'form-msg err'; }
+  } catch(err) { msg.textContent = '❌ Error de conexión: ' + err.message; msg.className = 'form-msg err'; }
   btn.disabled = false; btn.textContent = '📝 Enviar reseña';
   setTimeout(() => { msg.textContent = ''; }, 4000);
 });
@@ -364,11 +389,14 @@ function downloadV(n) { const blob = new Blob([scripts[n-1]], {type: 'text/plain
 function downloadReset() { const blob = new Blob([scripts[3]], {type: 'text/plain'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'KaraClan_Reset_Optimizer.ps1'; a.click(); URL.revokeObjectURL(a.href); }
 
 // ==================== INICIO ====================
-const savedLang = localStorage.getItem('kc_lang') || 'es';
-setLang(savedLang);
+const savedLang = localStorage.getItem('kara_lang') || 'es';
+setLanguage(savedLang);
 initDiscord();
 loadStats();
 loadReviews();
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+});
 </script>
 </body>
 </html>
