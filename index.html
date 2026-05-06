@@ -106,6 +106,16 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .d1{animation:fadeIn .1s forwards;}.d2{animation:fadeIn .15s forwards;}.d3{animation:fadeIn .2s forwards;}.d4{animation:fadeIn .25s forwards;}.d5{animation:fadeIn .3s forwards;}
 @media(max-width:480px){.cards{grid-template-columns:1fr;}.star-rating label{font-size:22px;}}
+
+/* ESTRELLAS DISTRIBUTION */
+.stars-distribution{margin:20px 0;background:var(--dark2);border-radius:8px;padding:15px;border:1px solid var(--border);}
+.stars-distribution h4{font-family:'Cinzel',serif;color:var(--gold2);font-size:0.8rem;margin-bottom:12px;text-align:center;}
+.star-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:10px;}
+.star-label{width:50px;text-align:right;color:var(--gold);}
+.star-bar-bg{flex:1;height:20px;background:#0a0b0f;border-radius:10px;overflow:hidden;}
+.star-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%;border-radius:10px;}
+.star-count{width:40px;text-align:left;color:var(--muted);}
+.star-percent{width:45px;text-align:right;color:var(--gold2);}
 </style>
 </head>
 <body>
@@ -121,8 +131,8 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 <div class="instructions">
   <h4>📖 How to use these scripts (3 easy steps)</h4>
   <div class="step"><div class="step-num">1</div><div class="step-text">📥 <strong>Download</strong> - Click "Download" on the version you want</div></div>
-  <div class="step"><div class="step-num">2</div><div class="step-text">📋 <strong>Open and copy</strong> - Open the file with Notepad, select ALL and copy (Ctrl+C)</div></div>
-  <div class="step"><div class="step-num">3</div><div class="step-text">⚡ <strong>Run in PowerShell</strong> - Open PowerShell as Administrator, paste the code (Ctrl+V) and press ENTER</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-text">📋 <strong>Open and copy</strong> - Open with Notepad, select ALL and copy (Ctrl+C)</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-text">⚡ <strong>Run in PowerShell</strong> - Open PowerShell as Admin, paste the code (Ctrl+V) and press ENTER</div></div>
   <div class="step"><div class="step-num">💡</div><div class="step-text">🔁 When finished, <strong>RESTART</strong> your PC to apply all changes</div></div>
 </div>
 
@@ -143,6 +153,12 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
       <div class="stat-box"><span class="stat-num" id="dl-v2">—</span><span class="stat-label">Vol. 2</span></div>
       <div class="stat-box"><span class="stat-num" id="dl-v3">—</span><span class="stat-label">Vol. 3</span></div>
       <div class="stat-box"><span class="stat-num" id="avg-rating">⭐ 0.0</span><span class="stat-label">Average rating</span></div>
+    </div>
+
+    <!-- STAR DISTRIBUTION (like Google) -->
+    <div class="stars-distribution" id="stars-distribution">
+      <h4>⭐ Rating distribution</h4>
+      <div id="star-distribution-content">Loading...</div>
     </div>
 
     <div class="chart-container">
@@ -379,7 +395,7 @@ async function loadStats() {
   } catch(e) { console.log('Stats error'); }
 }
 
-// ==================== REVIEWS ====================
+// ==================== REVIEWS & STAR DISTRIBUTION ====================
 async function loadReviews() {
   const container = document.getElementById('reviews-grid');
   const avgSpan = document.getElementById('avg-rating');
@@ -389,11 +405,14 @@ async function loadReviews() {
     const issues = await res.json();
     if (!issues.length) { 
       container.innerHTML = '<div class="loading-text">📝 No reviews yet. Be the first!</div>';
-      avgSpan.innerHTML = '⭐ 0.0'; 
+      avgSpan.innerHTML = '⭐ 0.0';
+      document.getElementById('star-distribution-content').innerHTML = '<div class="loading-text">No ratings yet</div>';
       return; 
     }
     container.innerHTML = '';
     let totalStars = 0, count = 0;
+    let starCounts = {1:0, 2:0, 3:0, 4:0, 5:0};
+    
     issues.forEach(issue => {
       let title = issue.title;
       let name = 'User';
@@ -411,7 +430,12 @@ async function loadReviews() {
       
       const ratingMatch = issue.title.match(/(\d+)\s*[⭐★]+/);
       let rating = 0;
-      if (ratingMatch) { rating = parseInt(ratingMatch[1]); totalStars += rating; count++; }
+      if (ratingMatch) { 
+        rating = parseInt(ratingMatch[1]); 
+        totalStars += rating; 
+        count++;
+        starCounts[rating] = (starCounts[rating] || 0) + 1;
+      }
       const starsHtml = rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '☆☆☆☆☆';
       const isVerified = issue.labels?.some(l => l.name === 'verified-discord') || false;
       const bodyText = (issue.body || 'No comment.').substring(0, 200);
@@ -430,10 +454,33 @@ async function loadReviews() {
       `;
       container.appendChild(reviewDiv);
     });
+    
+    // Calculate average
     const avg = count ? (totalStars / count).toFixed(1) : '0.0';
     const avgStars = '★'.repeat(Math.round(parseFloat(avg))) + '☆'.repeat(5 - Math.round(parseFloat(avg)));
     avgSpan.innerHTML = `${avgStars} ${avg}`;
-  } catch(e) { console.log('Reviews error'); }
+    
+    // Build star distribution UI (like Google)
+    const maxCount = Math.max(...Object.values(starCounts), 1);
+    let distributionHtml = '';
+    for (let stars = 5; stars >= 1; stars--) {
+      const countStars = starCounts[stars] || 0;
+      const percent = countStars > 0 ? (countStars / count * 100) : 0;
+      distributionHtml += `
+        <div class="star-row">
+          <div class="star-label">${stars} ${stars === 1 ? 'star' : 'stars'}</div>
+          <div class="star-bar-bg"><div class="star-bar-fill" style="width: ${percent}%;"></div></div>
+          <div class="star-count">${countStars}</div>
+          <div class="star-percent">${percent.toFixed(0)}%</div>
+        </div>
+      `;
+    }
+    document.getElementById('star-distribution-content').innerHTML = distributionHtml;
+    
+  } catch(e) { 
+    console.log('Reviews error'); 
+    document.getElementById('star-distribution-content').innerHTML = '<div class="loading-text">Error loading ratings</div>';
+  }
 }
 
 function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
