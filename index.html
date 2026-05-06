@@ -534,39 +534,94 @@ async function loadStats() {
   } catch(e) { console.log('Stats error'); }
 }
 
-// ==================== RESEÑAS ====================
+// ==================== RESEÑAS (CON IDIOMA) ====================
 async function loadReviews() {
   const container = document.getElementById('reviews-grid');
   const avgSpan = document.getElementById('avg-rating');
   const isEs = currentLang === 'es';
+  
   try {
     const res = await fetch(`${WORKER_URL}/reviews`);
     if (!res.ok) throw new Error();
     const issues = await res.json();
+    
     if (!issues.length) { 
       container.innerHTML = `<div class="loading-text">${isEs ? '📝 No hay reseñas aún. ¡Sé el primero!' : '📝 No reviews yet. Be the first!'}</div>`;
       avgSpan.innerHTML = '⭐ 0.0'; 
       return; 
     }
+    
     container.innerHTML = '';
     let totalStars = 0, count = 0;
+    
     issues.forEach(issue => {
-      const titleParts = issue.title.replace('📝 Reseña de ', '').replace('📝 Review from ', '').split('—');
-      const name = (titleParts[0] || (isEs ? 'Usuario' : 'User')).trim();
-      const volume = (titleParts[1] || '').trim();
+      // Extraer nombre y volumen del título (funciona en ambos idiomas)
+      let title = issue.title;
+      let name = '';
+      let volume = '';
+      
+      // Manejar títulos en español e inglés
+      if (title.includes('Reseña de')) {
+        const parts = title.replace('📝 Reseña de ', '').split('—');
+        name = (parts[0] || (isEs ? 'Usuario' : 'User')).trim();
+        volume = (parts[1] || '').trim();
+      } else if (title.includes('Review from')) {
+        const parts = title.replace('📝 Review from ', '').split('—');
+        name = (parts[0] || (isEs ? 'Usuario' : 'User')).trim();
+        volume = (parts[1] || '').trim();
+      } else {
+        // Fallback: intentar extraer cualquier cosa
+        const parts = title.split('—');
+        if (parts.length >= 2) {
+          name = parts[0].replace(/📝|Reseña de|Review from/g, '').trim();
+          volume = parts[1].trim();
+        } else {
+          name = isEs ? 'Usuario' : 'User';
+          volume = '';
+        }
+      }
+      
+      // Extraer puntuación
       const ratingMatch = issue.title.match(/(\d+)\s*[⭐★]+/);
       let rating = 0;
-      if (ratingMatch) { rating = parseInt(ratingMatch[1]); totalStars += rating; count++; }
+      if (ratingMatch) { 
+        rating = parseInt(ratingMatch[1]); 
+        totalStars += rating; 
+        count++; 
+      }
+      
       const starsHtml = rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '☆☆☆☆☆';
       const isVerified = issue.labels?.some(l => l.name === 'verified-discord') || false;
-      const reviewDiv = document.createElement('div'); reviewDiv.className = 'review';
-      reviewDiv.innerHTML = `<div class="review-header"><div class="review-avatar ${isVerified ? 'discord-avatar' : ''}">${name.charAt(0).toUpperCase()}</div><div class="review-meta"><div class="review-name">${escapeHtml(name)}${isVerified ? '<span class="verified-badge">✓ Discord</span>' : ''}</div><div class="review-vol">${escapeHtml(volume)}</div></div><div class="review-stars">${starsHtml}</div></div><div class="review-text">${escapeHtml(issue.body || (isEs ? 'Sin comentario.' : 'No comment.')).substring(0, 200)}</div>`;
+      
+      // Texto del cuerpo con idioma
+      let bodyText = issue.body || (isEs ? 'Sin comentario.' : 'No comment.');
+      // Limitar longitud
+      if (bodyText.length > 200) bodyText = bodyText.substring(0, 200) + '...';
+      
+      const reviewDiv = document.createElement('div'); 
+      reviewDiv.className = 'review';
+      reviewDiv.innerHTML = `
+        <div class="review-header">
+          <div class="review-avatar ${isVerified ? 'discord-avatar' : ''}">${escapeHtml(name.charAt(0).toUpperCase())}</div>
+          <div class="review-meta">
+            <div class="review-name">${escapeHtml(name)}${isVerified ? '<span class="verified-badge">✓ Discord</span>' : ''}</div>
+            <div class="review-vol">${escapeHtml(volume)}</div>
+          </div>
+          <div class="review-stars">${starsHtml}</div>
+        </div>
+        <div class="review-text">${escapeHtml(bodyText)}</div>
+      `;
       container.appendChild(reviewDiv);
     });
+    
     const avg = count ? (totalStars / count).toFixed(1) : '0.0';
     const avgStars = '★'.repeat(Math.round(parseFloat(avg))) + '☆'.repeat(5 - Math.round(parseFloat(avg)));
     avgSpan.innerHTML = `${avgStars} ${avg}`;
-  } catch(e) { console.log('Reviews error'); }
+    
+  } catch(e) { 
+    console.log('Reviews error'); 
+    container.innerHTML = `<div class="loading-text">${isEs ? '❌ Error al cargar reseñas' : '❌ Error loading reviews'}</div>`;
+  }
 }
 
 function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
