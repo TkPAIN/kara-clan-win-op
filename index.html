@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-:root{--gold:#c9a84c;--gold2:#f0d080;--dark:#0a0b0f;--dark2:#111218;--border:#2a2510;--text:#c8b870;--muted:#5a5030;--red:#c0392b;--red2:#e74c3c;--discord:#5865F2;--bg:#0a0b0f;--card:#111218;}
+:root{--gold:#c9a84c;--gold2:#f0d080;--dark:#0a0b0f;--dark2:#111218;--border:#2a2510;--text:#c8b870;--muted:#5a5030;--red:#c0392b;--red2:#e74c3c;--discord:#5865F2;--bg:#0a0b0f;--card:#111218;--telegram:#0088cc;}
 [data-theme="light"]{--gold:#c9a84c;--gold2:#d4b85c;--dark:#f5f5f0;--dark2:#ffffff;--border:#d4c9a8;--text:#1a1a1a;--muted:#666666;--bg:#f5f5f0;--card:#ffffff;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;transition:all 0.3s;}
@@ -37,6 +37,8 @@ main{max-width:1100px;margin:0 auto;padding:40px 18px;}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
 .btn-discord{background:linear-gradient(135deg,#2c2f33,#23272a);border:1px solid var(--discord);color:#fff;}
 .btn-discord:hover{background:linear-gradient(135deg,var(--discord),#4752c4);color:#fff;}
+.btn-telegram{background:linear-gradient(135deg,#0088cc,#006699);border:none;color:#fff;}
+.btn-telegram:hover{background:linear-gradient(135deg,#0099dd,#0077aa);color:#fff;}
 .btn-submit{background:linear-gradient(135deg,#1a1508,#2a2010);border:1px solid var(--gold);color:var(--gold);cursor:pointer;}
 .btn-submit:hover{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
 .btn-submit:disabled{opacity:0.5;}
@@ -130,8 +132,11 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 .discord-support{text-align:center;margin-top:20px;padding:15px;background:var(--dark);border-radius:8px;}
 .discord-support a{color:var(--discord);text-decoration:none;}
 .discord-support a:hover{text-decoration:underline;}
-
-/* ========== NUEVAS SECCIONES PENDIENTES ========== */
+.newsletter-section{margin:30px 0;background:var(--card);border-radius:8px;padding:20px;border:1px solid var(--border);text-align:center;}
+.newsletter-section h4{font-family:'Cinzel',serif;color:var(--gold2);font-size:0.9rem;margin-bottom:15px;}
+.newsletter-input{display:flex;gap:10px;max-width:400px;margin:0 auto;flex-wrap:wrap;}
+.newsletter-input input{flex:2;padding:10px;background:var(--dark);border:1px solid var(--border);color:var(--text);border-radius:4px;font-family:monospace;}
+.newsletter-input button{flex:1;}
 .gallery-section{margin:30px 0;background:var(--card);border-radius:8px;padding:20px;border:1px solid var(--border);}
 .gallery-section h4{font-family:'Cinzel',serif;color:var(--gold2);font-size:0.9rem;margin-bottom:15px;text-align:center;}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:15px;}
@@ -139,17 +144,11 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 .gallery-item img{max-width:100%;border-radius:4px;margin-bottom:8px;}
 .gallery-caption{font-size:8px;color:var(--muted);}
 .gallery-placeholder{background:linear-gradient(135deg,var(--gold),var(--gold2));height:120px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#000;font-size:10px;margin-bottom:8px;}
-.newsletter-section{margin:30px 0;background:var(--card);border-radius:8px;padding:20px;border:1px solid var(--border);text-align:center;}
-.newsletter-section h4{font-family:'Cinzel',serif;color:var(--gold2);font-size:0.9rem;margin-bottom:15px;}
-.newsletter-input{display:flex;gap:10px;max-width:400px;margin:0 auto;flex-wrap:wrap;}
-.newsletter-input input{flex:2;padding:10px;background:var(--dark);border:1px solid var(--border);color:var(--text);border-radius:4px;font-family:monospace;}
-.newsletter-input button{flex:1;}
 .portable-section{margin:30px 0;background:var(--card);border-radius:8px;padding:20px;border:1px solid var(--border);}
 .portable-section h4{font-family:'Cinzel',serif;color:var(--gold2);font-size:0.9rem;margin-bottom:15px;text-align:center;}
 .portable-buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;}
 .execution-counter{text-align:center;margin-top:15px;padding:10px;background:var(--dark);border-radius:8px;font-size:10px;}
 .execution-counter span{color:var(--gold2);font-weight:bold;}
-
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .d1{animation:fadeIn .1s forwards;}.d2{animation:fadeIn .15s forwards;}.d3{animation:fadeIn .2s forwards;}.d4{animation:fadeIn .25s forwards;}.d5{animation:fadeIn .3s forwards;}
 @media(max-width:480px){.cards{grid-template-columns:1fr;}.star-rating label{font-size:22px;}.comparison-table{font-size:7px;}}
@@ -222,9 +221,8 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
       <canvas id="downloadChart" width="400" height="300"></canvas>
     </div>
 
-    <!-- EXECUTION COUNTER (simulated, will be real later) -->
     <div class="execution-counter">
-      📊 Scripts executed: <span id="exec-count">0</span> times (tracked via GitHub)
+      📊 Scripts executed: <span id="exec-count">0</span> times
     </div>
 
     <div class="reviews-grid" id="reviews-grid"><div class="loading-text">📝 Loading reviews...</div></div>
@@ -256,9 +254,26 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     <div style="text-align:center;font-size:9px;margin-top:8px;">Stats from GitHub Releases | Verified reviews with Discord</div>
   </div>
 
-  <!-- ========== NUEVAS SECCIONES PENDIENTES ========== -->
+  <!-- NEWSLETTER + TELEGRAM + DISCORD -->
+  <div class="newsletter-section">
+    <h4>📧 Get updates</h4>
+    <p style="font-size:10px;margin-bottom:12px;">Receive notifications when new versions are released</p>
+    
+    <div style="text-align:center;margin-bottom:15px;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0monpq7B3bwKtA_G_rSsh5SYIV4OQaaYbJJElQnllDX5E5g/viewform" target="_blank" class="btn btn-primary" style="display:inline-block;text-decoration:none;">📧 Subscribe on Google Forms</a>
+    </div>
+    
+    <div style="text-align:center;font-size:10px;color:var(--border);margin:12px 0;">───── OR ─────</div>
+    
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://t.me/+xW5XBTxE09BlYzM0" target="_blank" class="btn btn-telegram" style="display:inline-flex;text-decoration:none;">📱 Join Telegram</a>
+      <a href="https://discord.gg/6A6C7aRV" target="_blank" class="btn btn-discord" style="display:inline-flex;text-decoration:none;">💬 Join Discord</a>
+    </div>
+    
+    <p style="font-size:8px;color:var(--muted);margin-top:12px;">🔔 Subscribe via Google Forms or join our community on Telegram/Discord</p>
+  </div>
 
-  <!-- GALERÍA DE CAPTURAS -->
+  <!-- GALLERY SECTION -->
   <div class="gallery-section">
     <h4>📸 Before / After Gallery</h4>
     <div class="gallery-grid">
@@ -282,19 +297,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     <div style="text-align:center;font-size:9px;color:var(--muted);margin-top:10px;">⭐ Send your before/after screenshots via Discord to be featured here!</div>
   </div>
 
-  <!-- NEWSLETTER -->
- <!-- NOTIFICACIONES VÍA TELEGRAM / DISCORD -->
-<div class="newsletter-section">
-  <h4>📢 Stay updated</h4>
-  <p style="font-size:10px;margin-bottom:12px;">Join our community to receive notifications about new versions</p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <a href="https://web.telegram.org/a/" target="_blank" class="btn btn-primary" style="display:inline-flex;text-decoration:none;background:linear-gradient(135deg,#0088cc,#006699);border:none;">📱 Join Telegram</a>
-    <a href="https://discord.gg/6A6C7aRV" target="_blank" class="btn btn-discord" style="display:inline-flex;text-decoration:none;">💬 Join Discord</a>
-  </div>
-  <p style="font-size:8px;color:var(--muted);margin-top:12px;">🔔 Get notified when new versions are released</p>
-</div>
-
-  <!-- VERSIÓN PORTABLE -->
+  <!-- PORTABLE VERSION -->
   <div class="portable-section">
     <h4>💾 Portable Version</h4>
     <p style="font-size:10px;margin-bottom:15px;text-align:center;">Run from USB drive without installation (no admin rights required for some features)</p>
@@ -319,7 +322,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 
   <!-- DISCORD SUPPORT -->
   <div class="discord-support">
-    💬 Need help? Join our <a href="https://discord.gg/karaclan" target="_blank">Discord Support Server</a> for assistance!
+    💬 Need help? Join our <a href="https://discord.gg/6A6C7aRV" target="_blank">Discord Support Server</a> for assistance!
   </div>
 
   <div class="info-list">Requires PowerShell as Administrator<br>Compatible with Windows 10 / 11<br>Free — Kara Clan</div>
@@ -365,9 +368,9 @@ function toggleFAQ(el) {
 // ==================== PORTABLE DOWNLOADS ====================
 function downloadPortable(version) {
   const portableScripts = {
-    1: `# KaraClan Portable v1 - User-level only\nWrite-Host "KARA CLAN PORTABLE v1" -ForegroundColor Cyan\nWrite-Host "Running user-level optimizations..." -ForegroundColor Yellow\n# DNS cache flush (doesn't require admin)\nipconfig /flushdns\nWrite-Host "DNS cache flushed" -ForegroundColor Green\nWrite-Host "Note: Some optimizations require Admin rights." -ForegroundColor Yellow\npause`,
-    2: `# KaraClan Portable v2 - User-level only\nWrite-Host "KARA CLAN PORTABLE v2" -ForegroundColor Cyan\nWrite-Host "Running user-level optimizations..." -ForegroundColor Yellow\n# DNS cache flush\nipconfig /flushdns\n# Game Mode (user setting)\nNew-Item -Path "HKCU:\\Software\\Microsoft\\GameBar" -Force | Out-Null\nSet-ItemProperty -Path "HKCU:\\Software\\Microsoft\\GameBar" -Name "AutoGameModeEnabled" -Value 1 -Type DWord -Force\nWrite-Host "Game Mode enabled" -ForegroundColor Green\nWrite-Host "Note: Some optimizations require Admin rights." -ForegroundColor Yellow\npause`,
-    3: `# KaraClan Portable v3 - User-level only\nWrite-Host "KARA CLAN PORTABLE v3" -ForegroundColor Cyan\nWrite-Host "Running user-level optimizations..." -ForegroundColor Yellow\n# DNS cache flush\nipconfig /flushdns\n# Visual effects (user)\nSet-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "UserPreferencesMask" -Value ([byte[]](0x90,0x12,0x03,0x80,0x10,0x00,0x00,0x00))\nWrite-Host "Visual effects optimized" -ForegroundColor Green\nWrite-Host "Note: Some optimizations require Admin rights." -ForegroundColor Yellow\npause`
+    1: `# Kara Clan Portable v1 - User-level only\nWrite-Host "KARA CLAN PORTABLE v1" -ForegroundColor Cyan\nWrite-Host "Running user-level optimizations..." -ForegroundColor Yellow\nipconfig /flushdns\nWrite-Host "DNS cache flushed" -ForegroundColor Green\nWrite-Host "Note: Some optimizations require Admin rights." -ForegroundColor Yellow\npause`,
+    2: `# Kara Clan Portable v2 - User-level only\nWrite-Host "KARA CLAN PORTABLE v2" -ForegroundColor Cyan\nWrite-Host "Running user-level optimizations..." -ForegroundColor Yellow\nipconfig /flushdns\nNew-Item -Path "HKCU:\\Software\\Microsoft\\GameBar" -Force | Out-Null\nSet-ItemProperty -Path "HKCU:\\Software\\Microsoft\\GameBar" -Name "AutoGameModeEnabled" -Value 1 -Type DWord -Force\nWrite-Host "Game Mode enabled" -ForegroundColor Green\nWrite-Host "Note: Some optimizations require Admin rights." -ForegroundColor Yellow\npause`,
+    3: `# Kara Clan Portable v3 - User-level only\nWrite-Host "KARA CLAN PORTABLE v3" -ForegroundColor Cyan\nWrite-Host "Running user-level optimizations..." -ForegroundColor Yellow\nipconfig /flushdns\nSet-ItemProperty -Path "HKCU:\\Control Panel\\Desktop" -Name "UserPreferencesMask" -Value ([byte[]](0x90,0x12,0x03,0x80,0x10,0x00,0x00,0x00))\nWrite-Host "Visual effects optimized" -ForegroundColor Green\nWrite-Host "Note: Some optimizations require Admin rights." -ForegroundColor Yellow\npause`
   };
   const blob = new Blob([portableScripts[version]], {type: 'text/plain'});
   const a = document.createElement('a');
@@ -437,8 +440,6 @@ async function loadStats() {
     document.getElementById('dl-v1').textContent = v1.toLocaleString();
     document.getElementById('dl-v2').textContent = v2.toLocaleString();
     document.getElementById('dl-v3').textContent = v3.toLocaleString();
-    
-    // Simulated execution count (will be real when tracking is added)
     document.getElementById('exec-count').textContent = (total > 0 ? total : '0');
     
     if (chart) {
