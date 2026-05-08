@@ -1,17 +1,21 @@
 # 🔴 ALWAYS FIRST
 $ErrorActionPreference = "Stop"
 
-# Comprobación correcta de administrador (sin saltos ni espacios mal)
+# Admin check (corregido)
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "Run this script as Administrator!" -ForegroundColor Red
+    pause
     exit
 }
 
-# ✅ Tu script empieza aquí
-# OptimizarWindows_v2.ps1 - AVANZADA (Gaming + GPU)
+# ✅ OptimizarWindows_v2.ps1 - AVANZADA
 $Host.UI.RawUI.WindowTitle = "Kara Clan v2 - AVANZADA"
 Clear-Host
-Write-Host "KARA CLAN v2 - AVANZADA" -ForegroundColor Cyan
+Write-Host "  =========================================" -ForegroundColor Cyan
+Write-Host "   KARA CLAN - OPTIMIZADOR v2" -ForegroundColor Cyan
+Write-Host "   Advanced Gaming + System" -ForegroundColor DarkCyan
+Write-Host "  =========================================" -ForegroundColor Cyan
+Write-Host ""
 
 # v1 + extras
 Get-ChildItem "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" | ForEach-Object {
@@ -28,6 +32,6 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multi
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Value 6 -Type DWord -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Type String -Force
 
-Write-Host "✅ v2 AVANZADA completada" -ForegroundColor Green
-Write-Host "Reinicia tu PC" -ForegroundColor Yellow
+Write-Host "  ✅ v2 AVANZADA completada" -ForegroundColor Green
+Write-Host "  Reinicia tu PC" -ForegroundColor Yellow
 pause
