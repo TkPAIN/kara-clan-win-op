@@ -488,31 +488,35 @@
             wrapper.style.display = wrapper.style.display === 'none' ? 'block' : 'none';
         }
         async function submitReview(e) {
-            e.preventDefault();
-            const name = document.getElementById('review-name').value.trim();
-            const volume = document.getElementById('review-volume').value;
-            const text = document.getElementById('review-text').value.trim();
-            if (!name || !volume || !text) return alert('Please fill all fields.');
-            try {
-                const token = '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';
-                const res = await fetch('https://api.github.com/repos/TkPAIN/kara-clan-win-op/issues', {
-                    method: 'POST',
-                    headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title: `${name} — ${volume}`, body: text, labels: ['review'] })
-                });
-                if (res.ok) {
-                    alert('Review submitted! It will appear shortly.');
-                    document.getElementById('review-form').reset();
-                    toggleReviewForm();
-                    loadReviews();
-                } else {
-                    alert('Error submitting review.');
-                }
-            } catch(err) {
-                alert('Connection error.');
-            }
+    e.preventDefault();
+    const name = document.getElementById('review-name').value.trim();
+    const volume = document.getElementById('review-volume').value;
+    const text = document.getElementById('review-text').value.trim();
+    if (!name || !volume || !text) return alert('Please fill all fields.');
+    
+    try {
+        const WORKER_URL = 'https://kara-clan-review-bot.marcos238gn.workers.dev';
+        
+        const res = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, volume, text })
+        });
+        
+        const data = await res.json();
+        
+        if (data.success) {
+            alert('Review submitted! It will appear shortly.');
+            document.getElementById('review-form').reset();
+            toggleReviewForm();
+            loadReviews();
+        } else {
+            alert('Error: ' + (data.error || 'Unknown error. Please try again.'));
         }
-
+    } catch(err) {
+        alert('Connection error. Please try again later.');
+    }
+}
         // ── Init ──
         document.addEventListener('DOMContentLoaded', () => {
             loadCounts();
