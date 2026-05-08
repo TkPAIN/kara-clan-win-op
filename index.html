@@ -348,6 +348,24 @@ const scripts = [
 `# KaraClan_Reset_Optimizer.ps1\n# Reverts ALL changes\n$Host.UI.RawUI.WindowTitle = "Kara Clan - Reset"\nClear-Host\nWrite-Host "KARA CLAN RESET - Reverting..." -ForegroundColor Red\n$ifaces = Get-ChildItem "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces"\nforeach ($i in $ifaces) { Remove-ItemProperty -Path $i.PSPath -Name "TcpAckFrequency" -Force -EA 0; Remove-ItemProperty -Path $i.PSPath -Name "TCPNoDelay" -Force -EA 0 }\nWrite-Host "OK: Nagle restored" -ForegroundColor Green\n$adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" }\nforeach ($a in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $a.InterfaceIndex -ResetServerAddresses -EA 0 }\nWrite-Host "OK: Automatic DNS" -ForegroundColor Green\n$q = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\Gaming"\nif (Test-Path $q) { Remove-Item -Path $q -Recurse -Force }\nWrite-Host "OK: QoS removed" -ForegroundColor Green\npowercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e 2>$null\npowercfg -h on 2>$null\nWrite-Host "OK: Balanced plan + Hibernation" -ForegroundColor Green\n$svcs = @("DiagTrack","WerSvc","Spooler","XblAuthManager","XblGameSave","MapsBroker","lfsvc","RemoteRegistry")\nforeach ($s in $svcs) { Set-Service $s -StartupType Manual -EA 0; Start-Service $s -EA 0 }\nWrite-Host "OK: Services restored" -ForegroundColor Green\nWrite-Host "RESET COMPLETED - Everything reverted" -ForegroundColor Yellow\npause`
 ];
 
+<!-- ═══════════════ KARA REVIEWS ═══════════════ -->
+<div class="kara-reviews" id="kara-reviews">
+  <div class="reviews-terminal">
+    <div class="reviews-titlebar">
+      <span class="reviews-dot"></span>
+      <span class="reviews-dot"></span>
+      <span class="reviews-dot"></span>
+      <span class="reviews-prompt">&gt; kara-reviews --load</span>
+    </div>
+    <h2 class="reviews-heading">
+      <i class="fas fa-comment-dots"></i> WHAT THE COMMUNITY SAYS
+    </h2>
+    <div class="reviews-grid" id="dynamic-reviews">
+      <div class="review-placeholder">Fetching reviews from GitHub...</div>
+    </div>
+  </div>
+</div>
+
 // ==================== DISCORD LOGIN ====================
 function initDiscord() {
   const urlParams = new URLSearchParams(window.location.search);
