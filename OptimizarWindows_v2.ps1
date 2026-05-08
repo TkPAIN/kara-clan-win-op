@@ -1,37 +1,24 @@
 # 🔴 ALWAYS FIRST
 $ErrorActionPreference = "Stop"
 
-if (-not ([Security.Principal.WindowsPrincipal] 
-    [Security.Principal.WindowsIdentity]::GetCurrent()
-).IsInRole([Security.Principal.WindowsBuiltinRole] "Administrator")) {
-
+# Comprobación correcta de administrador (sin saltos ni espacios mal)
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "Run this script as Administrator!" -ForegroundColor Red
     exit
 }
 
-# ✅ Your script starts here
-Write-Host "Starting optimizer..."
-
-Stop-Service -Name "DiagTrack"
-
-Write-Host "Done"
-
+# ✅ Tu script empieza aquí
 # OptimizarWindows_v2.ps1 - AVANZADA (Gaming + GPU)
 $Host.UI.RawUI.WindowTitle = "Kara Clan v2 - AVANZADA"
 Clear-Host
 Write-Host "KARA CLAN v2 - AVANZADA" -ForegroundColor Cyan
-
-if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "Ejecuta como Administrador" -ForegroundColor Red
-    pause; exit
-}
 
 # v1 + extras
 Get-ChildItem "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" | ForEach-Object {
     Set-ItemProperty -Path $_.PSPath -Name "TcpAckFrequency" -Value 1 -Force
     Set-ItemProperty -Path $_.PSPath -Name "TCPNoDelay" -Value 1 -Force
 }
-Get-NetAdapter | Where Status -eq "Up" | ForEach-Object {
+Get-NetAdapter | Where-Object Status -eq "Up" | ForEach-Object {
     Set-DnsClientServerAddress -InterfaceIndex $_.InterfaceIndex -ServerAddresses "1.1.1.1","1.0.0.1"
 }
 
